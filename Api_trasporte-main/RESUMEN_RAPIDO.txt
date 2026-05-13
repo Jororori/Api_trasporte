@@ -1,0 +1,276 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    ESTRUCTURA BÁSICA - RESUMEN RÁPIDO                       ║
+║                                                                             ║
+║  Proyecto: API REST con Arquitectura en Capas (.NET 10)                    ║
+║  Ejemplo: GET para obtener Transportistas de la Base de Datos              ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+📁 ESTRUCTURA DE CARPETAS
+════════════════════════════════════════════════════════════════════════════════
+
+API_TRANSPORTISTE/
+├── 📄 API_TRANSPORTISTE.csproj          ← Configuración del proyecto Web
+├── 📄 Program.cs                        ← Inyección de dependencias
+├── 📄 appsettings.json                  ← Connection String
+│
+├── 📁 Controllers/
+│   └── 📄 TransportistaController.cs    ← Endpoints HTTP GET
+│
+├── CapaServicio/
+│   ├── 📁 Interfaces/
+│   │   └── 📄 ITransportistaService.cs  ← Contrato del servicio
+│   ├── 📁 Servicios/
+│   │   └── 📄 TransportistaService.cs   ← Lógica de negocio
+│   └── 📄 CapaServicio.csproj
+│
+├── CapaDatos/
+│   ├── 📁 Interfaces/
+│   │   └── 📄 ITransportistaRepository.cs ← Contrato del repositorio
+│   ├── 📁 Repositorio/
+│   │   └── 📄 TransportistaRepository.cs  ← Acceso a BD
+│   └── 📄 CapaDatos.csproj
+│
+├── CapaEntidades/
+│   ├── 📄 Transportista.cs              ← Modelo de datos
+│   └── 📄 CapaEntidades.csproj
+│
+└── BD/
+    └── 📄 ScriptTransportistas.sql      ← Script de creación de tabla
+
+
+🔌 ENDPOINTS HTTP
+════════════════════════════════════════════════════════════════════════════════
+
+1️⃣  GET /api/transportista
+    ├─ Descripción: Obtiene todos los transportistas
+    ├─ Response: Lista de transportistas + count
+    └─ Códigos: 200 OK | 404 Not Found | 400 Bad Request
+
+2️⃣  GET /api/transportista/{id}
+    ├─ Descripción: Obtiene transportista por ID
+    ├─ Parámetro: id (int)
+    ├─ Response: Objeto transportista
+    └─ Códigos: 200 OK | 404 Not Found | 400 Bad Request
+
+
+📝 EJEMPLO DE RESPUESTA JSON
+════════════════════════════════════════════════════════════════════════════════
+
+GET /api/transportista
+─────────────────────────────────────────────────────────────────────────────
+
+{
+  "exito": true,
+  "datos": [
+    {
+      "id": 1,
+      "nombre": "Juan Pérez",
+      "cedula": "12345678",
+      "telefono": "3001234567",
+      "email": "juan.perez@example.com",
+      "activo": true,
+      "fechaRegistro": "2024-01-15T10:30:00"
+    },
+    {
+      "id": 2,
+      "nombre": "María García",
+      "cedula": "87654321",
+      "telefono": "3007654321",
+      "email": "maria.garcia@example.com",
+      "activo": true,
+      "fechaRegistro": "2024-01-16T14:20:00"
+    }
+  ],
+  "cantidad": 2
+}
+
+
+🔄 FLUJO DE LA SOLICITUD
+════════════════════════════════════════════════════════════════════════════════
+
+┌─────────┐
+│ Cliente │
+└────┬────┘
+     │
+     ├─→ GET /api/transportista
+     │
+     ▼
+┌──────────────────────────────┐
+│ TransportistaController      │  ← Recibe solicitud
+│ .ObtenerTodos()              │
+└────┬─────────────────────────┘
+     │
+     ▼
+┌──────────────────────────────┐
+│ TransportistaService         │  ← Valida y procesa
+│ .ObtenerTodos()              │
+└────┬─────────────────────────┘
+     │
+     ▼
+┌──────────────────────────────┐
+│ TransportistaRepository      │  ← Accede a BD
+│ .ObtenerTodosAsync()         │
+└────┬─────────────────────────┘
+     │
+     ▼
+┌──────────────────────────────┐
+│ SQL Server                   │  ← Retorna datos
+│ SELECT * FROM Transportistas │
+└────┬─────────────────────────┘
+     │
+     ▼ (Mapea Transportista)
+┌──────────────────────────────┐
+│ Response JSON                │
+└──────────────────────────────┘
+
+
+⚙️ CONFIGURACIÓN REQUERIDA
+════════════════════════════════════════════════════════════════════════════════
+
+appsettings.json:
+─────────────────────────────────────────────────────────────────────────────
+
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=TU_SERVIDOR;Database=BDTransporte;User Id=sa;Password=TU_PASSWORD;TrustServerCertificate=True;"
+  }
+}
+
+ScriptTransportistas.sql:
+─────────────────────────────────────────────────────────────────────────────
+
+CREATE TABLE Transportistas (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(150) NOT NULL,
+    Cedula NVARCHAR(20) NOT NULL UNIQUE,
+    Telefono NVARCHAR(20) NOT NULL,
+    Email NVARCHAR(100) NOT NULL,
+    Activo BIT NOT NULL DEFAULT 1,
+    FechaRegistro DATETIME NOT NULL DEFAULT GETDATE()
+);
+
+
+🚀 PASOS PARA EJECUTAR
+════════════════════════════════════════════════════════════════════════════════
+
+1. Crear tabla en SQL Server (ejecutar ScriptTransportistas.sql)
+
+2. Actualizar connection string en appsettings.json
+
+3. Compilar solución:
+   dotnet build
+
+4. Ejecutar API:
+   dotnet run --project API_TRANSPORTISTE
+
+5. Probar endpoint:
+   - Swagger: https://localhost:5001/swagger
+   - Postman: GET https://localhost:5001/api/transportista
+
+
+📚 ARCHIVOS IMPORTANTES
+════════════════════════════════════════════════════════════════════════════════
+
+✓ TransportistaController.cs    - Define endpoints HTTP
+✓ TransportistaService.cs       - Implementa lógica de negocio
+✓ TransportistaRepository.cs    - Accede a la base de datos
+✓ Transportista.cs              - Define modelo de datos
+✓ Program.cs                    - Configura inyección de dependencias
+✓ appsettings.json             - Cadena de conexión
+✓ ScriptTransportistas.sql     - Crea tabla en BD
+
+
+💡 CONCEPTOS CLAVE
+════════════════════════════════════════════════════════════════════════════════
+
+Arquitectura en Capas:
+  - Presentación (API)
+  - Lógica de Negocio (Service)
+  - Acceso a Datos (Repository)
+  - Modelos (Entities)
+
+Inyección de Dependencias:
+  - Permite reutilización
+  - Facilita testing
+  - Desacoplamiento de capas
+
+Interfaces:
+  - ITransportistaService
+  - ITransportistaRepository
+  - Abstracción y contrato
+
+Patrones:
+  - Repository Pattern
+  - Service Layer Pattern
+  - Dependency Injection Pattern
+
+
+🔍 PROBANDO LA API
+════════════════════════════════════════════════════════════════════════════════
+
+Con cURL:
+─────────────────────────────────────────────────────────────────────────────
+curl -X GET https://localhost:5001/api/transportista
+
+Con Postman:
+─────────────────────────────────────────────────────────────────────────────
+Method:  GET
+URL:     https://localhost:5001/api/transportista
+Headers: Content-Type: application/json
+
+Con PowerShell:
+─────────────────────────────────────────────────────────────────────────────
+$uri = "https://localhost:5001/api/transportista"
+$response = Invoke-RestMethod -Uri $uri -Method Get
+$response | ConvertTo-Json
+
+
+📊 TABLA DE CÓDIGOS HTTP
+════════════════════════════════════════════════════════════════════════════════
+
+200 OK              ← Solicitud exitosa
+201 Created         ← Recurso creado (POST)
+204 No Content      ← Solicitud exitosa sin contenido
+400 Bad Request     ← Parámetros inválidos
+404 Not Found       ← Recurso no encontrado
+500 Server Error    ← Error en servidor
+
+
+✅ VALIDACIÓN DE COMPILACIÓN
+════════════════════════════════════════════════════════════════════════════════
+
+✓ CapaEntidades        - Compila correctamente
+✓ CapaDatos           - Compila correctamente
+✓ CapaServicio        - Compila correctamente
+✓ API_TRANSPORTISTE   - Compila correctamente
+
+Estado: LISTO PARA EJECUTAR ✅
+
+
+📖 PRÓXIMAS EXTENSIONES
+════════════════════════════════════════════════════════════════════════════════
+
+□ Agregar POST (Crear)
+□ Agregar PUT (Actualizar)
+□ Agregar DELETE (Eliminar)
+□ Validaciones con FluentValidation
+□ Autenticación con JWT
+□ Logging con Serilog
+□ Caché con Redis
+□ Entity Framework Core
+□ Unit Tests con xUnit
+□ Swagger Documentation
+
+
+═════════════════════════════════════════════════════════════════════════════════
+
+🎯 ¡ESTRUCTURA LISTA PARA USAR!
+
+Consulta los archivos para más detalles:
+- DOCUMENTACION.md        → Documentación completa
+- DIAGRAMA_ARQUITECTURA.txt → Diagramas visuales
+- Postman_Endpoints.json  → Importar en Postman
+- EJEMPLO_CLIENTE.cs      → Código cliente de ejemplo
+
+═════════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,102 @@
+[
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "buses",
+    "RelativePath": "api/Transportista/{id}/buses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "ciudades",
+    "RelativePath": "api/Transportista/{id}/ciudades",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "programaciones",
+    "RelativePath": "api/Transportista/{id}/programaciones",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Fecha",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdOrigen",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdDestino",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "rutas",
+    "RelativePath": "api/Transportista/{id}/rutas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[API_TRANSPORTISTE.WeatherForecast, API_TRANSPORTISTE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]
