@@ -64,7 +64,7 @@ namespace API_TRANSPORTISTE.Controllers
             {
                 return BadRequest(new { exito = false, error = ex.Message });
             }
-        }
+        } /* unjfkv*/
 
         [HttpGet("{id}/programaciones")]
         public async Task<IActionResult> programaciones(int id, DateTime Fecha , int IdOrigen , int IdDestino)
@@ -80,6 +80,7 @@ namespace API_TRANSPORTISTE.Controllers
             {
                 return BadRequest(new { exito = false, error = ex.Message });
             }
+            
         }
     }
 }
