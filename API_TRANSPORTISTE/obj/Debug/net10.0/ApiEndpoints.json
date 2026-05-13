@@ -79,6 +79,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "TipoAsiento",
+    "RelativePath": "api/Transportista/TipoAsiento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API_TRANSPORTISTE.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

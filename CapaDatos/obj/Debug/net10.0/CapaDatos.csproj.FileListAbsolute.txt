@@ -43,3 +43,19 @@ D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.dll
 D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\refint\CapaDatos.dll
 D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.pdb
 D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\ref\CapaDatos.dll
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\bin\Debug\net10.0\CapaDatos.deps.json
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\bin\Debug\net10.0\CapaDatos.dll
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\bin\Debug\net10.0\CapaDatos.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\bin\Debug\net10.0\CapaEntidades.dll
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\bin\Debug\net10.0\CapaEntidades.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.AssemblyReference.cache
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfoInputs.cache
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfo.cs
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.sourcelink.json
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.Up2Date
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.dll
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\refint\CapaDatos.dll
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\ref\CapaDatos.dll

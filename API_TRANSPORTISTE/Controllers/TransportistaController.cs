@@ -1,3 +1,4 @@
+using CapaEntidades;
 using CapaServicio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ namespace API_TRANSPORTISTE.Controllers
             _service = service;
         }
 
-       
+
 
         [HttpGet("{id}/ciudades")]
         public async Task<IActionResult> ciudades(int id)
@@ -67,14 +68,45 @@ namespace API_TRANSPORTISTE.Controllers
         }
 
         [HttpGet("{id}/programaciones")]
-        public async Task<IActionResult> programaciones(int id, DateTime Fecha , int IdOrigen , int IdDestino)
+        public async Task<IActionResult> programaciones(int id, DateTime Fecha, int IdOrigen, int IdDestino)
         {
             try
             {
-                var transportista = await _service.ObtenerProgramacionPor(id,Fecha , IdOrigen , IdDestino);
+                var transportista = await _service.ObtenerProgramacionPor(id, Fecha, IdOrigen, IdDestino);
                 if (transportista == null || transportista.Count == 0)
                     return NotFound(new { mensaje = $"No hay rutas disponibles" });
                 return Ok(new { exito = true, datos = transportista });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { exito = false, error = ex.Message });
+            }
+        }
+
+
+
+        [HttpGet("TipoAsiento")]
+        public async Task<IActionResult> TipoAsiento()
+        {
+            try
+            {
+                var listaAsientos = new List<TipoAsiento>
+                {
+                    new TipoAsiento
+                    {
+                        IdTipoAsiento = 1,
+                        TiposAsiento = "140",
+                        Precio = 0.00m
+                    },
+                    new TipoAsiento
+                    {
+                        IdTipoAsiento = 2,
+                        TiposAsiento = "160",
+                        Precio = 0.00m
+                    }
+                };
+
+                return Ok(new { exito = true, datos = listaAsientos });
             }
             catch (Exception ex)
             {

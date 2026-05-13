@@ -153,6 +153,18 @@
         }
       }
     },
+    "/api/Transportista/TipoAsiento": {
+      "get": {
+        "tags": [
+          "Transportista"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [

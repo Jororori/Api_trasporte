@@ -1,14 +1,14 @@
-using CapaEntidades;
 using CapaDatos.Interfaces;
+using CapaEntidades;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 
 namespace CapaDatos.Repositorio
 {
     public class TransportistaRepository : ITransportistaRepository
     {
-       
+
         private readonly IConfiguration _configuration;
 
         public TransportistaRepository(IConfiguration configuration)
@@ -22,7 +22,7 @@ namespace CapaDatos.Repositorio
                 _configuration.GetConnectionString(name)
             );
         }
-        
+
 
         public async Task<List<Transportista>> ObtenerTodosAsync()
         {
@@ -208,7 +208,7 @@ namespace CapaDatos.Repositorio
 
                                 buses.Add(bus);
                             }
-                        }   
+                        }
                     }
                 }
             }
@@ -239,7 +239,7 @@ namespace CapaDatos.Repositorio
                             asientos.Add(new Asientos
                             {
                                 IdAsiento = Convert.ToInt32(reader[4]),
-                                Numero = reader[0]?.ToString(), 
+                                Numero = reader[0]?.ToString(),
                                 NumeroFila = Convert.ToInt32(reader[1]),
                                 NumeroColumna = Convert.ToInt32(reader[2]),
                                 NumeroPiso = Convert.ToInt32(reader[3]),
@@ -251,7 +251,7 @@ namespace CapaDatos.Repositorio
 
             return asientos;
         }
-        /*Prueba */
+
 
         public async Task<List<Programaciones>> ObtenerProgramacionPor(int Id, DateTime Fecha, int IdOrigen, int IdDestino)
         {
@@ -299,6 +299,36 @@ namespace CapaDatos.Repositorio
             return programaciones;
         }
 
-
+        public async Task<List<TipoAsiento>> ObtenerTiposAsiento()
+        {
+            var tiposAsiento = new List<TipoAsiento>();
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SELECT IdTipoAsiento, TIpoAsientpo FROM TipoAsiento", connection))
+                    {
+                        command.CommandType = CommandType.Text;
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                tiposAsiento.Add(new TipoAsiento
+                                {
+                                    IdTipoAsiento = Convert.ToInt32(reader[0]),
+                                    TiposAsiento = reader[1]?.ToString() ?? ""
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener tipos de asiento: {ex.Message}", ex);
+            }
+            return tiposAsiento;
+        }
     }
 }

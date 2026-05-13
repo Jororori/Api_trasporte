@@ -11,7 +11,7 @@ namespace CapaServicio.Servicios
         public TransportistaService(ITransportistaRepository repository)
         {
             _repository = repository;
-            
+
         }
 
         public async Task<List<Transportista>> ObtenerTodos()
@@ -88,7 +88,7 @@ namespace CapaServicio.Servicios
             }
         }
 
-        public async Task<List<Programaciones>> ObtenerProgramacionPor(int Id,DateTime Fecha, int IdOrigen, int IdDestino)
+        public async Task<List<Programaciones>> ObtenerProgramacionPor(int Id, DateTime Fecha, int IdOrigen, int IdDestino)
         {
             try
             {
@@ -102,5 +102,18 @@ namespace CapaServicio.Servicios
                 throw new Exception($"Error en servicio al obtener programaciones: {ex.Message}", ex);
             }
         }
+        public async Task<List<TipoAsiento>> ObtenerTiposAsiento()
+        {
+            try
+            {
+                var tipos = await _repository.ObtenerTiposAsiento();
+                return tipos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener tipos de asiento: {ex.Message}", ex);
+            }
+        }
+
     }
 }
