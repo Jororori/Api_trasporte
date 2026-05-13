@@ -251,7 +251,7 @@ namespace CapaDatos.Repositorio
 
             return asientos;
         }
-
+        /*Prueba */
 
         public async Task<List<Programaciones>> ObtenerProgramacionPor(int Id, DateTime Fecha, int IdOrigen, int IdDestino)
         {
