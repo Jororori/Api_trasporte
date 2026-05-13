@@ -1,0 +1,122 @@
+{
+  "info": {
+    "name": "API Transportista - Endpoints GET",
+    "description": "Colección de endpoints para la API de Transportista",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Obtener todos los Transportistas",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://localhost:5001/api/transportista",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "transportista"]
+        },
+        "description": "Obtiene la lista de todos los transportistas registrados en el sistema"
+      },
+      "response": [
+        {
+          "name": "Respuesta Exitosa",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:5001/api/transportista",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "transportista"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "body": "{\n  \"exito\": true,\n  \"datos\": [\n    {\n      \"id\": 1,\n      \"nombre\": \"Juan Pérez\",\n      \"cedula\": \"12345678\",\n      \"telefono\": \"3001234567\",\n      \"email\": \"juan.perez@example.com\",\n      \"activo\": true,\n      \"fechaRegistro\": \"2024-01-15T10:30:00\"\n    },\n    {\n      \"id\": 2,\n      \"nombre\": \"María García\",\n      \"cedula\": \"87654321\",\n      \"telefono\": \"3007654321\",\n      \"email\": \"maria.garcia@example.com\",\n      \"activo\": true,\n      \"fechaRegistro\": \"2024-01-16T14:20:00\"\n    }\n  ],\n  \"cantidad\": 2\n}\n"
+        }
+      ]
+    },
+    {
+      "name": "Obtener Transportista por ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://localhost:5001/api/transportista/1",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "transportista", "1"]
+        },
+        "description": "Obtiene los detalles de un transportista específico por su ID"
+      },
+      "response": [
+        {
+          "name": "Respuesta Exitosa",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:5001/api/transportista/1",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "transportista", "1"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "body": "{\n  \"exito\": true,\n  \"datos\": {\n    \"id\": 1,\n    \"nombre\": \"Juan Pérez\",\n    \"cedula\": \"12345678\",\n    \"telefono\": \"3001234567\",\n    \"email\": \"juan.perez@example.com\",\n    \"activo\": true,\n    \"fechaRegistro\": \"2024-01-15T10:30:00\"\n  }\n}\n"
+        },
+        {
+          "name": "No Encontrado",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:5001/api/transportista/999",
+              "protocol": "https",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "transportista", "999"]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "body": "{\n  \"exito\": false,\n  \"mensaje\": \"Transportista con ID 999 no encontrado\"\n}\n"
+        }
+      ]
+    }
+  ]
+}
