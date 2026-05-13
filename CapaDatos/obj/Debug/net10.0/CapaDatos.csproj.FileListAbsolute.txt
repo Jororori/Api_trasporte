@@ -1,0 +1,45 @@
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.AssemblyReference.cache
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfoInputs.cache
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfo.cs
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaDatos.deps.json
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaDatos.dll
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaDatos.pdb
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaEntidades.dll
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaEntidades.pdb
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.Up2Date
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.dll
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\refint\CapaDatos.dll
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.pdb
+C:\Users\SISTEMAS\source\repos\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\ref\CapaDatos.dll
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaDatos.deps.json
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaDatos.dll
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaDatos.pdb
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaEntidades.dll
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\bin\Debug\net10.0\CapaEntidades.pdb
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.AssemblyReference.cache
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfoInputs.cache
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfo.cs
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.Up2Date
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.dll
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\refint\CapaDatos.dll
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\CapaDatos.pdb
+C:\Users\josue\Downloads\API TRANSPORTE\API TRANSPORTE\API_TRANSPORTISTE\CapaDatos\obj\Debug\net10.0\ref\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\bin\Debug\net10.0\CapaDatos.deps.json
+D:\API TRANSPORTE\CapaDatos\bin\Debug\net10.0\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\bin\Debug\net10.0\CapaDatos.pdb
+D:\API TRANSPORTE\CapaDatos\bin\Debug\net10.0\CapaEntidades.dll
+D:\API TRANSPORTE\CapaDatos\bin\Debug\net10.0\CapaEntidades.pdb
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.AssemblyReference.cache
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfoInputs.cache
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.AssemblyInfo.cs
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.CoreCompileInputs.cache
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.csproj.Up2Date
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\refint\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.pdb
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\ref\CapaDatos.dll
