@@ -35,7 +35,7 @@ namespace API_TRANSPORTISTE.Controllers
 
 
         [HttpGet("ciudades")]
-        public async Task<IActionResult> ciudades()
+        public async Task<IActionResult> Ciudades()
         {
             try
             {
@@ -62,7 +62,7 @@ namespace API_TRANSPORTISTE.Controllers
         }
 
         [HttpGet("rutas")]
-        public async Task<IActionResult> rutas()
+        public async Task<IActionResult> Rutas()
         {
             try
             {
@@ -89,7 +89,7 @@ namespace API_TRANSPORTISTE.Controllers
         }
 
         [HttpGet("buses")]
-        public async Task<IActionResult> buses()
+        public async Task<IActionResult> Buses()
         {
             try
             {
@@ -115,7 +115,7 @@ namespace API_TRANSPORTISTE.Controllers
         }
 
         [HttpGet("programaciones")]
-        public async Task<IActionResult> programaciones(DateTime Fecha, int IdOrigen, int IdDestino)
+        public async Task<IActionResult> Programaciones(DateTime Fecha, int IdOrigen, int IdDestino)
         {
             try
             {
@@ -180,6 +180,31 @@ namespace API_TRANSPORTISTE.Controllers
                 if (transportista == null || transportista.Count == 0)
                     return NotFound(new { mensaje = $"No hay asientos disponibles" });
                 return Ok(new { exito = true, datos = transportista });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { exito = false, error = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> bloquearAsientos(int IdDetalleProgramacion)
+        {
+            try
+            {
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
+                var token = authHeader.Replace("Bearer ", "").Trim();
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(token);
+                if (idEmpresa == -1)
+                    return Unauthorized();
+
+                
+                var resultado = await _service.BloquearAsientoPor(IdDetalleProgramacion);
+                if (!resultado)
+                    return BadRequest(new { mensaje = "No se pudo insertar el transportista" });
+                return Ok(new { exito = true, mensaje = "Transportista insertado correctamente" });
             }
             catch (Exception ex)
             {
