@@ -115,5 +115,20 @@ namespace CapaServicio.Servicios
             }
         }
 
+        public async Task<List<DetalleProgramacion>> ObtenerAsientosPor(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                    throw new ArgumentException("El id debe ser mayor a 0");
+                var asientos = await _repository.ObtenerAsientosPor(id);
+                return asientos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener asientos: {ex.Message}", ex);
+            }
+        }
+
     }
 }

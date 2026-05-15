@@ -43,3 +43,4 @@ C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\Capa
 C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\refint\CapaEntidades.dll
 C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.pdb
 C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\ref\CapaEntidades.dll
+D:\API TRANSPORTE\CapaEntidades\obj\Debug\net10.0\CapaEntidades.sourcelink.json

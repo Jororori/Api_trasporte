@@ -1,11 +1,15 @@
+using API_TRANSPORTISTE.Configuration;
 using CapaEntidades;
 using CapaServicio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API_TRANSPORTISTE.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class TransportistaController : ControllerBase
     {
         private readonly ITransportistaService _service;
@@ -15,71 +19,124 @@ namespace API_TRANSPORTISTE.Controllers
             _service = service;
         }
 
+        /// <summary>
+        /// Obtiene el IdEmpresa del token actual
+        /// </summary>
+        private int ObtenerIdEmpresaDelToken()
+        {
+            var claim = User.FindFirst("idEmpresa");
+            if (claim != null && int.TryParse(claim.Value, out var idEmpresa))
+            {
+                return idEmpresa;
+            }
+            return -1;
+        }
 
 
-        [HttpGet("{id}/ciudades")]
-        public async Task<IActionResult> ciudades(int id)
+
+        [HttpGet("ciudades")]
+        public async Task<IActionResult> ciudades()
         {
             try
             {
-                var transportista = await _service.ObtenerCuidadesPor(id);
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
 
-                if (transportista == null || transportista.Count == 0)
-                    return NotFound(new { mensaje = $"No hay ciudades para el transportista con ID {id}" });
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
 
-                return Ok(new { exito = true, datos = transportista });
+                var token = authHeader.Replace("Bearer ", "").Trim();
+
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(token);
+
+                if (idEmpresa == -1)
+                    return Unauthorized(new { mensaje = "Token inválido" });
+
+                var data = await _service.ObtenerCuidadesPor(idEmpresa);
+
+                return Ok(new { exito = true, datos = data });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return StatusCode(500, new { exito = false, error = ex.Message });
             }
         }
 
-        [HttpGet("{id}/rutas")]
-        public async Task<IActionResult> rutas(int id)
+        [HttpGet("rutas")]
+        public async Task<IActionResult> rutas()
         {
             try
             {
-                var transportista = await _service.ObtenerRutasPor(id);
-                if (transportista == null || transportista.Count == 0)
-                    return NotFound(new { mensaje = $"No hay rutas para el transportista con ID {id}" });
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
+
+                var token = authHeader.Replace("Bearer ", "").Trim();
+
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(token);
+                if (idEmpresa == -1)
+                    return Unauthorized();
+
+                var transportista = await _service.ObtenerRutasPor(idEmpresa);
+
+               
                 return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return StatusCode(500, new { exito = false, error = ex.Message });
             }
         }
 
-        [HttpGet("{id}/buses")]
-        public async Task<IActionResult> buses(int id)
+        [HttpGet("buses")]
+        public async Task<IActionResult> buses()
         {
             try
             {
-                var transportista = await _service.ObtenerBusesPor(id);
-                if (transportista == null || transportista.Count == 0)
-                    return NotFound(new { mensaje = $"No hay buses para el transportista con ID {id}" });
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
+
+                var token = authHeader.Replace("Bearer ", "").Trim();
+
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(token);
+                if (idEmpresa == -1)
+                    return Unauthorized();
+
+                var transportista = await _service.ObtenerBusesPor(idEmpresa);
+              
                 return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return StatusCode(500, new { exito = false, error = ex.Message });
             }
         }
 
-        [HttpGet("{id}/programaciones")]
-        public async Task<IActionResult> programaciones(int id, DateTime Fecha, int IdOrigen, int IdDestino)
+        [HttpGet("programaciones")]
+        public async Task<IActionResult> programaciones(DateTime Fecha, int IdOrigen, int IdDestino)
         {
             try
             {
-                var transportista = await _service.ObtenerProgramacionPor(id, Fecha, IdOrigen, IdDestino);
-                if (transportista == null || transportista.Count == 0)
-                    return NotFound(new { mensaje = $"No hay rutas disponibles" });
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
+
+                var token = authHeader.Replace("Bearer ", "").Trim();
+
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(token);
+                if (idEmpresa == -1)
+                    return Unauthorized();
+
+                var transportista = await _service.ObtenerProgramacionPor(idEmpresa, Fecha, IdOrigen, IdDestino);
+               
                 return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return StatusCode(500, new { exito = false, error = ex.Message });
             }
         }
 
@@ -104,9 +161,25 @@ namespace API_TRANSPORTISTE.Controllers
                         TiposAsiento = "160",
                         Precio = 0.00m
                     }
-                };
+                };//la lista de los tipos de haciendo es parte de la logica de datos, no deberia estar aca. Arregla eso. Hay que mantener el orden de de estructuras.
 
                 return Ok(new { exito = true, datos = listaAsientos });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { exito = false, error = ex.Message });
+            }
+        }
+
+        [HttpGet("programaciones/{id}/asientos")]
+        public async Task<IActionResult> Asientos(int id)
+        {
+            try
+            {
+                var transportista = await _service.ObtenerAsientosPor(id);
+                if (transportista == null || transportista.Count == 0)
+                    return NotFound(new { mensaje = $"No hay asientos disponibles" });
+                return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
             {

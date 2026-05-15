@@ -6,32 +6,17 @@
   },
   "servers": [
     {
-      "url": "https://localhost:7133"
+      "url": "http://localhost:5000"
     },
     {
-      "url": "http://localhost:5025"
+      "url": "https://localhost:5001"
     }
   ],
   "paths": {
-    "/api/Transportista/{id}/ciudades": {
+    "/api/Transportista/ciudades": {
       "get": {
         "tags": [
           "Transportista"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -40,25 +25,10 @@
         }
       }
     },
-    "/api/Transportista/{id}/rutas": {
+    "/api/Transportista/rutas": {
       "get": {
         "tags": [
           "Transportista"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -67,25 +37,10 @@
         }
       }
     },
-    "/api/Transportista/{id}/buses": {
+    "/api/Transportista/buses": {
       "get": {
         "tags": [
           "Transportista"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          }
         ],
         "responses": {
           "200": {
@@ -94,25 +49,12 @@
         }
       }
     },
-    "/api/Transportista/{id}/programaciones": {
+    "/api/Transportista/programaciones": {
       "get": {
         "tags": [
           "Transportista"
         ],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          },
           {
             "name": "Fecha",
             "in": "query",
@@ -157,6 +99,33 @@
       "get": {
         "tags": [
           "Transportista"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Transportista/programaciones/{id}/asientos": {
+      "get": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {

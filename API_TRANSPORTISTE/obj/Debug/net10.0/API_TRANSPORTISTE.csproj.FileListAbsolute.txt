@@ -182,3 +182,5 @@ C:\Users\josue\Downloads\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\
 C:\Users\josue\Downloads\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.pdb
 C:\Users\josue\Downloads\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.genruntimeconfig.cache
 C:\Users\josue\Downloads\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\ref\API_TRANSPORTISTE.dll
+D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.sourcelink.json
+D:\API TRANSPORTE\API_TRANSPORTISTE\bin\Debug\net10.0\appsettings.Production.json

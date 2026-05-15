@@ -59,3 +59,4 @@ C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDato
 C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\refint\CapaDatos.dll
 C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\CapaDatos.pdb
 C:\Users\josue\Downloads\Api_trasporte-main\CapaDatos\obj\Debug\net10.0\ref\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\obj\Debug\net10.0\CapaDatos.sourcelink.json

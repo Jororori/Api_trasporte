@@ -9,7 +9,8 @@
       "CapaServicio/1.0.0": {
         "dependencies": {
           "CapaDatos": "1.0.0",
-          "CapaEntidades": "1.0.0"
+          "CapaEntidades": "1.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.7"
         },
         "runtime": {
           "CapaServicio.dll": {}

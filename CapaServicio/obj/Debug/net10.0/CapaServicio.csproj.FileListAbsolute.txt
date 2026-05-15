@@ -67,3 +67,4 @@ C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaS
 C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\refint\CapaServicio.dll
 C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.pdb
 C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\ref\CapaServicio.dll
+D:\API TRANSPORTE\CapaServicio\obj\Debug\net10.0\CapaServicio.sourcelink.json

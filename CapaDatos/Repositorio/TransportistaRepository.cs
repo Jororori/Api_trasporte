@@ -330,5 +330,37 @@ namespace CapaDatos.Repositorio
             }
             return tiposAsiento;
         }
+
+        public async Task<List<DetalleProgramacion>> ObtenerAsientosPor(int id)
+        {
+            var asientos = new List<DetalleProgramacion>();
+            using (SqlConnection connection = GetConnection("TransportistaConnection"))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand("SP_CargarPlantillaV2", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@IdProgramacion", id);
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            asientos.Add(new DetalleProgramacion
+                            {
+                                IdDetalleProgramacion = Convert.ToInt32(reader[5]),
+                                ValorAsiento = reader[0]?.ToString(),
+                                NumeroFila = Convert.ToInt32(reader[1]),
+                                NumeroColumna = Convert.ToInt32(reader[2]),
+                                NumeroPiso = Convert.ToInt32(reader[3]),
+                                Estado = Convert.ToInt32(reader[4]),
+                                PrecioPiso1 = Convert.ToDecimal(reader[8]), 
+                                PrecioPiso2 = Convert.ToDecimal(reader[9])
+                            });
+                        }
+                    }
+                }
+            }
+            return asientos;
+        }
     }
 }
