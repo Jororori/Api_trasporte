@@ -17,7 +17,7 @@ namespace API_TRANSPORTISTE.Configuration
             { "bearer_reset_soft_secreto_abc123def456", 1 },
 
             // Token para empresa 2
-            { "UygJULtqrzputY5yyODpSVGrKluO0wb7BpqoFsLeYbPyZYmG2SXDSBOGkGmSGCm2", 129 },
+            { "UygJULtqrzputY5yyODpSVGrKluO0wb7BpqoFsLeYbPy54", 129 },
 
             // Token para empresa 3
             { "UygJULtqrzputY5yyODpSVGrKluO0wb7BpqoFsLeYbPyZYmG2SXDSBOGkGmSGCm2", 3 },

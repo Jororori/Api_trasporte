@@ -362,5 +362,30 @@ namespace CapaDatos.Repositorio
             }
             return asientos;
         }
+
+        public async Task<bool> BloquearAsientoPor(int idDetalleProgramacion)
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_BloquearAsiento", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalleProgramacion", idDetalleProgramacion);
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al bloquear asiento con idDetalleProgramacion {idDetalleProgramacion}: {ex.Message}", ex);
+            }
+        }
+
+
+//_______________________________________________________________________________________________
     }
 }

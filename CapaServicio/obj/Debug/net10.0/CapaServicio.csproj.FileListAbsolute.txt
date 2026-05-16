@@ -68,3 +68,20 @@ C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\refin
 C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.pdb
 C:\Users\josue\Downloads\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\ref\CapaServicio.dll
 D:\API TRANSPORTE\CapaServicio\obj\Debug\net10.0\CapaServicio.sourcelink.json
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaServicio.deps.json
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaServicio.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaServicio.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaDatos.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaEntidades.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaDatos.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\bin\Debug\net10.0\CapaEntidades.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.csproj.AssemblyReference.cache
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.AssemblyInfoInputs.cache
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.AssemblyInfo.cs
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.csproj.CoreCompileInputs.cache
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServ.EB8B5DEC.Up2Date
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\refint\CapaServicio.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\CapaServicio.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaServicio\obj\Debug\net10.0\ref\CapaServicio.dll

@@ -13,5 +13,6 @@ namespace CapaDatos.Interfaces
         Task<List<Programaciones>> ObtenerProgramacionPor(int Id,DateTime Fecha, int IdOrigen, int IdDestino);
         Task<List<TipoAsiento>> ObtenerTiposAsiento();
         Task<List<DetalleProgramacion>> ObtenerAsientosPor(int id);
+        Task<bool> BloquearAsientoPor(int idDetalleProgramacion);
     }
 }

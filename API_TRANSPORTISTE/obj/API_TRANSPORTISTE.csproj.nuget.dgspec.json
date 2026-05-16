@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj": {}
+    "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj": {}
   },
   "projects": {
-    "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj": {
+    "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj",
+        "projectUniqueName": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj",
         "projectName": "API_TRANSPORTISTE",
-        "projectPath": "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj",
-        "packagesPath": "C:\\Users\\SISTEMAS\\.nuget\\packages\\",
-        "outputPath": "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\obj\\",
+        "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\API_TRANSPORTISTE\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -29,6 +28,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -36,14 +36,14 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj": {
-                "projectPath": "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj"
+              "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj": {
+                "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj"
               },
-              "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj": {
-                "projectPath": "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj"
+              "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj": {
+                "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj"
               },
-              "D:\\API TRANSPORTE\\CapaServicio\\CapaServicio.csproj": {
-                "projectPath": "D:\\API TRANSPORTE\\CapaServicio\\CapaServicio.csproj"
+              "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaServicio\\CapaServicio.csproj": {
+                "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaServicio\\CapaServicio.csproj"
               }
             }
           }
@@ -58,7 +58,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -511,22 +511,21 @@
         }
       }
     },
-    "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj": {
+    "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj",
+        "projectUniqueName": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj",
         "projectName": "CapaDatos",
-        "projectPath": "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj",
-        "packagesPath": "C:\\Users\\SISTEMAS\\.nuget\\packages\\",
-        "outputPath": "D:\\API TRANSPORTE\\CapaDatos\\obj\\",
+        "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -536,6 +535,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -543,8 +543,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj": {
-                "projectPath": "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj"
+              "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj": {
+                "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj"
               }
             }
           }
@@ -559,7 +559,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -591,7 +591,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -869,22 +869,21 @@
         }
       }
     },
-    "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj": {
+    "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj",
+        "projectUniqueName": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj",
         "projectName": "CapaEntidades",
-        "projectPath": "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj",
-        "packagesPath": "C:\\Users\\SISTEMAS\\.nuget\\packages\\",
-        "outputPath": "D:\\API TRANSPORTE\\CapaEntidades\\obj\\",
+        "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -894,6 +893,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -913,7 +913,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -935,7 +935,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1213,22 +1213,21 @@
         }
       }
     },
-    "D:\\API TRANSPORTE\\CapaServicio\\CapaServicio.csproj": {
+    "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaServicio\\CapaServicio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\API TRANSPORTE\\CapaServicio\\CapaServicio.csproj",
+        "projectUniqueName": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaServicio\\CapaServicio.csproj",
         "projectName": "CapaServicio",
-        "projectPath": "D:\\API TRANSPORTE\\CapaServicio\\CapaServicio.csproj",
-        "packagesPath": "C:\\Users\\SISTEMAS\\.nuget\\packages\\",
-        "outputPath": "D:\\API TRANSPORTE\\CapaServicio\\obj\\",
+        "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaServicio\\CapaServicio.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaServicio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -1238,6 +1237,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -1245,11 +1245,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj": {
-                "projectPath": "D:\\API TRANSPORTE\\CapaDatos\\CapaDatos.csproj"
+              "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj": {
+                "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaDatos\\CapaDatos.csproj"
               },
-              "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj": {
-                "projectPath": "D:\\API TRANSPORTE\\CapaEntidades\\CapaEntidades.csproj"
+              "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj": {
+                "projectPath": "C:\\Users\\josue\\Downloads\\Api_trasporte-main\\Api_trasporte-main\\CapaEntidades\\CapaEntidades.csproj"
               }
             }
           }
@@ -1264,7 +1264,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -1292,7 +1292,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.204/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

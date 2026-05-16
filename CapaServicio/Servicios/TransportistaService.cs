@@ -130,5 +130,20 @@ namespace CapaServicio.Servicios
             }
         }
 
+        public async Task<bool> BloquearAsientoPor(int idDetalleProgramacion)
+        {
+            try
+            {
+                if (idDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                var resultado = await _repository.BloquearAsientoPor(idDetalleProgramacion);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al bloquear asiento: {ex.Message}", ex);
+            }
+
+        }
     }
 }

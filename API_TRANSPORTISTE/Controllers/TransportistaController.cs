@@ -200,7 +200,7 @@ namespace API_TRANSPORTISTE.Controllers
                 if (idEmpresa == -1)
                     return Unauthorized();
 
-                
+
                 var resultado = await _service.BloquearAsientoPor(IdDetalleProgramacion);
                 if (!resultado)
                     return BadRequest(new { mensaje = "No se pudo insertar el transportista" });

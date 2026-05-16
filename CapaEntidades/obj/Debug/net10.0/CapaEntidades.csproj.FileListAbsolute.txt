@@ -44,3 +44,14 @@ C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\refi
 C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.pdb
 C:\Users\josue\Downloads\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\ref\CapaEntidades.dll
 D:\API TRANSPORTE\CapaEntidades\obj\Debug\net10.0\CapaEntidades.sourcelink.json
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\bin\Debug\net10.0\CapaEntidades.deps.json
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\bin\Debug\net10.0\CapaEntidades.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\bin\Debug\net10.0\CapaEntidades.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.AssemblyInfoInputs.cache
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.AssemblyInfo.cs
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.csproj.CoreCompileInputs.cache
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\refint\CapaEntidades.dll
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\CapaEntidades.pdb
+C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\CapaEntidades\obj\Debug\net10.0\ref\CapaEntidades.dll

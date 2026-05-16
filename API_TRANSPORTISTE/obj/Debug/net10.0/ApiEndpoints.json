@@ -1,7 +1,23 @@
 [
   {
     "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
-    "Method": "buses",
+    "Method": "bloquearAsientos",
+    "RelativePath": "api/Transportista",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdDetalleProgramacion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "Buses",
     "RelativePath": "api/Transportista/buses",
     "HttpMethod": "GET",
     "IsController": true,
@@ -11,7 +27,7 @@
   },
   {
     "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
-    "Method": "ciudades",
+    "Method": "Ciudades",
     "RelativePath": "api/Transportista/ciudades",
     "HttpMethod": "GET",
     "IsController": true,
@@ -21,7 +37,7 @@
   },
   {
     "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
-    "Method": "programaciones",
+    "Method": "Programaciones",
     "RelativePath": "api/Transportista/programaciones",
     "HttpMethod": "GET",
     "IsController": true,
@@ -63,7 +79,7 @@
   },
   {
     "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
-    "Method": "rutas",
+    "Method": "Rutas",
     "RelativePath": "api/Transportista/rutas",
     "HttpMethod": "GET",
     "IsController": true,

@@ -13,5 +13,6 @@ namespace CapaServicio.Interfaces
 
         Task<List<TipoAsiento>> ObtenerTiposAsiento();
         Task<List<DetalleProgramacion>> ObtenerAsientosPor(int id);
+        Task<bool> BloquearAsientoPor(int idDetalleProgramacion);
     }
 }
