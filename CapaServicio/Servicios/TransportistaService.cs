@@ -130,13 +130,13 @@ namespace CapaServicio.Servicios
             }
         }
 
-        public async Task<bool> BloquearAsientoPor(int idDetalleProgramacion)
+        public async Task<string> BloquearAsientoPor(int idDetalleProgramacion)
         {
             try
             {
                 if (idDetalleProgramacion <= 0)
                     throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
-                var resultado = await _repository.BloquearAsientoPor(idDetalleProgramacion);
+                string resultado = await _repository.BloquearAsientoPor(idDetalleProgramacion);
                 return resultado;
             }
             catch (Exception ex)
@@ -145,5 +145,52 @@ namespace CapaServicio.Servicios
             }
 
         }
+
+        public async Task<bool> LimpiarBloqueoAsientos()
+        {
+            try
+            {
+                var resultado = await _repository.LimpiarBloqueoAsientos();
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al limpiar bloqueo de asientos: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<bool> LiberarAsientoPorToken(string token)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(token))
+                    throw new ArgumentException("El token no puede estar vacío");
+                var resultado = await _repository.LiberarAsientoPorToken(token);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al liberar asiento por token: {ex.Message}", ex);
+            }
+        }
+        public async Task<int> CrearReserva(int TipoDocumento, string NroDocumento, string Pasajero, DateTime? FechaNacimiento, int Edad, string Sexo, string Ruc, string RazonSocial, string Direccion, int TipoDocVenta, DateTime? FechaEmision, int IdAgenciaOrigen, int IdAgenciaDestino, string FormaDePago, string MedioPago, string Tarjeta, DateTime? FechaVencimiento, double Adelanto, string Observaciones, int IdUsuario, int Estado, int IdDocumento, int IdDetalleProgramacion, string precio, string PrecioLetra, string PrecioReprog, string HoraSalida, string Menor, int Embarque, string Telefono)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(NroDocumento))
+                    throw new ArgumentException("El número de documento no puede estar vacío");
+                if (string.IsNullOrWhiteSpace(Pasajero))
+                    throw new ArgumentException("El nombre del pasajero no puede estar vacío");
+                if (IdDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                var resultado = await _repository.CrearReserva(TipoDocumento, NroDocumento, Pasajero, FechaNacimiento, Edad, Sexo, Ruc, RazonSocial, Direccion, TipoDocVenta, FechaEmision, IdAgenciaOrigen, IdAgenciaDestino, FormaDePago, MedioPago, Tarjeta, FechaVencimiento, Adelanto, Observaciones, IdUsuario, Estado, IdDocumento, IdDetalleProgramacion, precio, PrecioLetra, PrecioReprog, HoraSalida, Menor, Embarque, Telefono);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al crear reserva: {ex.Message}", ex);
+            }
+        }
+      
     }
 }

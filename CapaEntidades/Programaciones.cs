@@ -18,5 +18,6 @@ namespace CapaEntidades
         public decimal PrecioPiso1 { get; set; }
         public decimal PrecioPiso2 { get; set; }
         public int Estado { get; set; }
+        public List<PuntoIntemedio> PuntosIntermedios { get; set; } = new();
     }
 }

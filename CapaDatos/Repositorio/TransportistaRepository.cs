@@ -3,6 +3,7 @@ using CapaEntidades;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.Json;
 
 namespace CapaDatos.Repositorio
 {
@@ -272,6 +273,8 @@ namespace CapaDatos.Repositorio
                         {
                             while (await reader.ReadAsync())
                             {
+                                var jsonPuntos = reader[14]?.ToString();
+
                                 programaciones.Add(new Programaciones
                                 {
                                     IdProgramacion = Convert.ToInt32(reader[0]),
@@ -285,7 +288,8 @@ namespace CapaDatos.Repositorio
                                     Conductor = reader[13]?.ToString() ?? "",
                                     PrecioPiso1 = Convert.ToDecimal(reader[6]),
                                     PrecioPiso2 = Convert.ToDecimal(reader[7]),
-                                    Estado = Convert.ToInt32(reader[9])
+                                    Estado = Convert.ToInt32(reader[9]),
+                                    PuntosIntermedios = string.IsNullOrEmpty(jsonPuntos) ? new List<PuntoIntemedio>() : JsonSerializer.Deserialize<List<PuntoIntemedio>>(jsonPuntos)
                                 });
                             }
                         }
@@ -318,6 +322,7 @@ namespace CapaDatos.Repositorio
                                 {
                                     IdTipoAsiento = Convert.ToInt32(reader[0]),
                                     TiposAsiento = reader[1]?.ToString() ?? ""
+
                                 });
                             }
                         }
@@ -343,8 +348,11 @@ namespace CapaDatos.Repositorio
                     command.Parameters.AddWithValue("@IdProgramacion", id);
                     using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
+
                         while (await reader.ReadAsync())
                         {
+                            var jsonPuntos = reader[10]?.ToString();
+
                             asientos.Add(new DetalleProgramacion
                             {
                                 IdDetalleProgramacion = Convert.ToInt32(reader[5]),
@@ -353,8 +361,13 @@ namespace CapaDatos.Repositorio
                                 NumeroColumna = Convert.ToInt32(reader[2]),
                                 NumeroPiso = Convert.ToInt32(reader[3]),
                                 Estado = Convert.ToInt32(reader[4]),
-                                PrecioPiso1 = Convert.ToDecimal(reader[8]), 
-                                PrecioPiso2 = Convert.ToDecimal(reader[9])
+                                PrecioPiso1 = Convert.ToDecimal(reader[8]),
+                                PrecioPiso2 = Convert.ToDecimal(reader[9]),
+                                PuntosIntermedios = string.IsNullOrEmpty(jsonPuntos) ? new List<PuntoIntemedio>() : JsonSerializer.Deserialize<List<PuntoIntemedio>>(jsonPuntos),
+                                IdOrigen = Convert.ToInt32(reader[11]),
+                                PuntoOrigen = reader[12]?.ToString() ?? "",
+                                IdDestino = Convert.ToInt32(reader[13]),
+                                PuntoDestino = reader[14]?.ToString() ?? ""
                             });
                         }
                     }
@@ -363,21 +376,22 @@ namespace CapaDatos.Repositorio
             return asientos;
         }
 
-        public async Task<bool> BloquearAsientoPor(int idDetalleProgramacion)
+        public async Task<string> BloquearAsientoPor(int idDetalleProgramacion)
         {
             try
             {
-                using (SqlConnection connection = GetConnection("TransportistaConnection"))
-                {
-                    await connection.OpenAsync();
-                    using (SqlCommand command = new SqlCommand("SP_BloquearAsiento", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@IdDetalleProgramacion", idDetalleProgramacion);
-                        int rowsAffected = await command.ExecuteNonQueryAsync();
-                        return rowsAffected > 0;
-                    }
-                }
+                using SqlConnection connection = GetConnection("TransportistaConnection");
+                await connection.OpenAsync();
+
+                using SqlCommand command = new SqlCommand("SP_BloquearDetalleSalida", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add("@IdDetalleProgramacion", SqlDbType.Int).Value = idDetalleProgramacion;
+
+                // ExecuteScalarAsync obtiene el objeto devuelto por el SELECT
+                object result = await command.ExecuteScalarAsync();
+
+                // Convertimos a string de forma segura; si es nulo, devuelve un string vacío
+                return result?.ToString() ?? string.Empty;
             }
             catch (Exception ex)
             {
@@ -385,7 +399,112 @@ namespace CapaDatos.Repositorio
             }
         }
 
+        public async Task<bool> LimpiarBloqueoAsientos()
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_LiberarDetalleTokenAut", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al limpiar bloqueo de asientos: {ex.Message}", ex);
+            }
 
-//_______________________________________________________________________________________________
+        }
+
+        public async Task<bool> LiberarAsientoPorToken(string token)
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_LiberarDetalleConToken", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@Token", SqlDbType.VarChar).Value = token;
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al liberar asiento con token {token}: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<int> CrearReserva(int TipoDocumento, string NroDocumento, string Pasajero, DateTime? FechaNacimiento, int Edad, string Sexo, string Ruc, string RazonSocial, string Direccion, int TipoDocVenta, DateTime? FechaEmision, int IdAgenciaOrigen, int IdAgenciaDestino, string FormaDePago, string MedioPago, string Tarjeta, DateTime? FechaVencimiento, double Adelanto, string Observaciones, int IdUsuario, int Estado, int IdDocumento, int IdDetalleProgramacion, string precio, string PrecioLetra, string PrecioReprog, string HoraSalida, string Menor, int Embarque, string Telefono)
+        {
+            int codigo = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_CrearDetalleSalidaV2", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@TipoDoc", TipoDocumento);
+                        command.Parameters.AddWithValue("@NroDoc", NroDocumento);
+                        command.Parameters.AddWithValue("@Pasajero", Pasajero);
+                        var param = command.Parameters.Add("@FechaNacimiento", SqlDbType.Date); param.Value = (object?)FechaNacimiento?.Date ?? DBNull.Value;
+                        command.Parameters.AddWithValue("@Edad", Edad);
+                        command.Parameters.AddWithValue("@Sexo", Sexo);
+                        command.Parameters.AddWithValue("@Ruc", Ruc);
+                        command.Parameters.AddWithValue("@Empresa", RazonSocial);
+                        command.Parameters.AddWithValue("@Direccion", Direccion);
+                        command.Parameters.AddWithValue("@TipoDocVenta", TipoDocVenta);
+                        command.Parameters.AddWithValue("@FechaEmision", FechaEmision);
+                        command.Parameters.AddWithValue("@AgOrigen", IdAgenciaOrigen);
+                        command.Parameters.AddWithValue("@AgDestino", IdAgenciaDestino);
+                        command.Parameters.AddWithValue("@Forma", FormaDePago);
+                        command.Parameters.AddWithValue("@FormaPago", MedioPago);
+                        command.Parameters.AddWithValue("@Tarjeta", Tarjeta);
+                        var param2 = command.Parameters.Add("@FechaVenc", SqlDbType.Date); param.Value = (object?)FechaNacimiento?.Date ?? DBNull.Value;
+                        command.Parameters.AddWithValue("@Adelanto", Adelanto);
+                        command.Parameters.AddWithValue("@Observacion", Observaciones);
+                        command.Parameters.AddWithValue("@IdUsuario", IdUsuario);
+                        command.Parameters.AddWithValue("@Estado", Estado);
+                        command.Parameters.AddWithValue("@IdDocumento", IdDocumento);
+                        command.Parameters.AddWithValue("@IdDetalleSalida", IdDetalleProgramacion);
+                        command.Parameters.AddWithValue("@Precio", precio);
+                        command.Parameters.AddWithValue("@PrecioLetra", PrecioLetra);
+                        command.Parameters.AddWithValue("@PrecioReprog", PrecioReprog);
+                        command.Parameters.AddWithValue("@HoraSalida", HoraSalida);
+                        command.Parameters.AddWithValue("@Menor", Menor);
+                        command.Parameters.AddWithValue("@Embarque", Embarque);
+                        command.Parameters.AddWithValue("@Telefono", Telefono);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                codigo = reader.GetInt32(0);
+                            }
+                        }
+                    }
+
+                }
+
+                return codigo;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al crear reserva: {ex.Message}", ex);
+            }
+        }
+
+      
     }
 }

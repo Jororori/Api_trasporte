@@ -134,7 +134,7 @@
         }
       }
     },
-    "/api/Transportista": {
+    "/api/Transportista/Asientos/BloqueoAsiento": {
       "post": {
         "tags": [
           "Transportista"
@@ -153,6 +153,60 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Transportista/Asientos/Bloquear/{token}": {
+      "delete": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Transportista/Reservas": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetalleReserva"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetalleReserva"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetalleReserva"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -202,6 +256,139 @@
   },
   "components": {
     "schemas": {
+      "DetalleReserva": {
+        "type": "object",
+        "properties": {
+          "idDetalleProgramacion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "tipoDocumento": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "nroDocumento": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "pasajero": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "telefono": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ruc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "razonSocial": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "direccion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fechaNacimiento": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "edad": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "sexo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "idAgenciaOrigen": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "idAgenciaDestino": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "medioDePago": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tarjeta": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "horaSalida": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "observacion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "menor": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "precio": {
+            "type": "string"
+          },
+          "precioLetra": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "WeatherForecast": {
         "type": "object",
         "properties": {

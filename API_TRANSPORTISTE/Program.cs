@@ -16,6 +16,9 @@ builder.Services.AddScoped<ITransportistaRepository, TransportistaRepository>();
 // Services
 builder.Services.AddScoped<ITransportistaService, TransportistaService>();
 
+// Servicio de tarea programada (se ejecuta cada minuto automáticamente)
+builder.Services.AddHostedService<API_TRANSPORTISTE.Services.TareaProgramadaService>();
+
 // Configurar autenticación por API Key (simplificado)
 builder.Services.AddAuthentication("ApiKey")
     .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null);

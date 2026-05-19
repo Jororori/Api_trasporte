@@ -1,9 +1,12 @@
-using API_TRANSPORTISTE.Configuration;
+ using API_TRANSPORTISTE.Configuration;
+using API_TRANSPORTISTE.Utilities;
 using CapaEntidades;
 using CapaServicio.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text.Json.Nodes;
 
 namespace API_TRANSPORTISTE.Controllers
 {
@@ -79,7 +82,7 @@ namespace API_TRANSPORTISTE.Controllers
 
                 var transportista = await _service.ObtenerRutasPor(idEmpresa);
 
-               
+
                 return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
@@ -105,7 +108,7 @@ namespace API_TRANSPORTISTE.Controllers
                     return Unauthorized();
 
                 var transportista = await _service.ObtenerBusesPor(idEmpresa);
-              
+
                 return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
@@ -131,7 +134,7 @@ namespace API_TRANSPORTISTE.Controllers
                     return Unauthorized();
 
                 var transportista = await _service.ObtenerProgramacionPor(idEmpresa, Fecha, IdOrigen, IdDestino);
-               
+
                 return Ok(new { exito = true, datos = transportista });
             }
             catch (Exception ex)
@@ -187,8 +190,8 @@ namespace API_TRANSPORTISTE.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> bloquearAsientos(int IdDetalleProgramacion)
+        [HttpPost("Asientos/BloqueoAsiento")]
+        public async Task<IActionResult> BloquearAsientos(int IdDetalleProgramacion)
         {
             try
             {
@@ -202,14 +205,102 @@ namespace API_TRANSPORTISTE.Controllers
 
 
                 var resultado = await _service.BloquearAsientoPor(IdDetalleProgramacion);
-                if (!resultado)
-                    return BadRequest(new { mensaje = "No se pudo insertar el transportista" });
-                return Ok(new { exito = true, mensaje = "Transportista insertado correctamente" });
+                if (resultado == null)
+                    return BadRequest(new { mensaje = "No se Obtuvo Token Valido, Este asiento se esta usando por alguien mas" });
+                return Ok(new { exito = true, mensaje = "Token Generado Correctamente", Token = resultado });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { exito = false, error = ex.Message });
             }
         }
+
+        [HttpDelete("Asientos/Bloquear/{token}")]
+        public async Task<IActionResult> LiberarAsientoPorToken(string token)
+        {
+            try
+            {
+                if (token == null)
+                {
+                    return Unauthorized(new { mesaje = "token no existente" });
+                }
+
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
+                var tokenEmpresa = authHeader.Replace("Bearer ", "").Trim();
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(tokenEmpresa);
+                if (idEmpresa == -1)
+                    return Unauthorized();
+
+                var resultado = await _service.LiberarAsientoPorToken(token);
+
+                return Ok(new { exito = true, mensaje = "Asiento liberado correctamente" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { exito = false, error = ex.Message });
+
+            }
+        }
+
+        [HttpPost("Reservas")]
+        public async Task<IActionResult> CrearReserva(DetalleReserva Venta)
+        {
+            try
+            {
+                var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
+                if (string.IsNullOrWhiteSpace(authHeader))
+                    return Unauthorized(new { mensaje = "Token no enviado" });
+                var tokenEmpresa = authHeader.Replace("Bearer ", "").Trim();
+                var idEmpresa = ApiKeyConfig.ObtenerIdEmpresa(tokenEmpresa);
+                if (idEmpresa == -1)
+                    return Unauthorized();
+
+                int TipoDocumentoVenta = 3;
+                string NuevaDataMenor = "";
+
+                DateTime FechaEmision = DateTime.Now;
+                DateTime? FechaVencimiento = null;
+
+                if (string.IsNullOrWhiteSpace(Venta.Menor))
+                    Venta.Menor = "";
+
+                if (string.IsNullOrWhiteSpace(Venta.Telefono))
+                    Venta.Telefono = "-";
+
+
+                if (string.IsNullOrWhiteSpace(Venta.Tarjeta))
+                    Venta.Tarjeta = "";
+                if (string.IsNullOrEmpty(Venta.Observacion))
+                    Venta.Observacion = "";
+
+                if (Venta.Menor != "")
+                {
+                    JsonNode datosMenor = JsonNode.Parse(Venta.Menor);
+                    datosMenor["IdClienteNatular"] = 0;
+
+                    NuevaDataMenor = datosMenor.ToJsonString();
+                }
+                
+                if (Venta.Ruc.Length == 11)
+                {
+                    TipoDocumentoVenta = 1;
+                }
+
+                Venta.PrecioLetra = ConvertidorPrecioALetras.ConvertirPrecioALetras(Convert.ToString(Venta.Precio));
+
+                var Crear = await _service.CrearReserva(Venta.TipoDocumento, Venta.NroDocumento, Venta.Pasajero, Venta.FechaNacimiento, Venta.Edad, Venta.Sexo, Venta.Ruc, Venta.RazonSocial, Venta.Direccion, TipoDocumentoVenta, FechaEmision, Venta.IdAgenciaOrigen, Venta.IdAgenciaDestino, "Contado", Venta.MedioDePago, Venta.Tarjeta, FechaVencimiento, 0.00, Venta.Observacion, 0, 2, 0, Venta.IdDetalleProgramacion, Convert.ToString(Venta.Precio), Venta.PrecioLetra, "0.000", Venta.HoraSalida, NuevaDataMenor, 0, Venta.Telefono);
+
+                return Ok(new { exito = true, mensaje = "Reserva creada correctamente", Codigo = Crear });
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { exito = false, error = ex.Message });
+            }
+        }
+
+        
     }
 }
