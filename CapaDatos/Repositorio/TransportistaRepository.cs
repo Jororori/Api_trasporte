@@ -139,7 +139,7 @@ namespace CapaDatos.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al obtener ciudades del transportista con id {id}: {ex.Message}", ex);
+                throw new Exception($"id = {id}: {ex.Message}", ex);
             }
 
             return ciudades;
@@ -175,10 +175,11 @@ namespace CapaDatos.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al obtener rutas del transportista con id {id}: {ex.Message}", ex);
+                throw new Exception($"Error al obtener rutas con id {id}: {ex.Message}", ex);
             }
             return rutas;
         }
+
 
         public async Task<List<Buses>> ObtenerBusesPor(int id)
         {
@@ -215,7 +216,7 @@ namespace CapaDatos.Repositorio
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error al obtener buses del transportista con id {id}: {ex.Message}", ex);
+                throw new Exception($"Error al obtener buses con id {id}: {ex.Message}", ex);
             }
             return buses;
         }

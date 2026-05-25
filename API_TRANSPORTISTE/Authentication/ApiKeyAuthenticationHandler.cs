@@ -46,10 +46,10 @@ namespace API_TRANSPORTISTE.Authentication
                 return Task.FromResult(AuthenticateResult.Fail("API Key vacío"));
             }
 
-            // ✅ SIMPLIFICADO: Solo validar si el token está en la lista de ApiKeyConfig
+            // ✅ VALIDAR: Si el token NO está en la lista de ApiKeyConfig
             if (!ApiKeyConfig.EsTokenValido(apiKey))
             {
-                return Task.FromResult(AuthenticateResult.Fail("API Key inválido"));
+                return Task.FromResult(AuthenticateResult.Fail("Credenciales de API inválidas."));
             }
 
             // Obtener el IdEmpresa asignado a este token

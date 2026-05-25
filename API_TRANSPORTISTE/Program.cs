@@ -55,6 +55,9 @@ app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
+// Middleware para manejar errores de autenticación
+app.UseMiddleware<AuthenticationErrorHandlerMiddleware>();
+
 // Importante: El orden es Authentication → Authorization
 app.UseAuthentication();
 app.UseAuthorization();

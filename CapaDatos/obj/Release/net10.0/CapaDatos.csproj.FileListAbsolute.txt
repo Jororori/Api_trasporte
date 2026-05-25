@@ -1,0 +1,16 @@
+D:\API TRANSPORTE\CapaDatos\bin\Release\net10.0\CapaDatos.deps.json
+D:\API TRANSPORTE\CapaDatos\bin\Release\net10.0\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\bin\Release\net10.0\CapaDatos.pdb
+D:\API TRANSPORTE\CapaDatos\bin\Release\net10.0\CapaEntidades.dll
+D:\API TRANSPORTE\CapaDatos\bin\Release\net10.0\CapaEntidades.pdb
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.csproj.AssemblyReference.cache
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.GeneratedMSBuildEditorConfig.editorconfig
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.AssemblyInfoInputs.cache
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.AssemblyInfo.cs
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.csproj.CoreCompileInputs.cache
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.sourcelink.json
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.csproj.Up2Date
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\refint\CapaDatos.dll
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\CapaDatos.pdb
+D:\API TRANSPORTE\CapaDatos\obj\Release\net10.0\ref\CapaDatos.dll

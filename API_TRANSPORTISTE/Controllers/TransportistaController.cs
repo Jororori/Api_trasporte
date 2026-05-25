@@ -11,7 +11,7 @@ using System.Text.Json.Nodes;
 namespace API_TRANSPORTISTE.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("v1/auth/[controller]")]
     [Authorize]
     public class TransportistaController : ControllerBase
     {
@@ -56,14 +56,14 @@ namespace API_TRANSPORTISTE.Controllers
 
                 var data = await _service.ObtenerCuidadesPor(idEmpresa);
 
-                return Ok(new { exito = true, datos = data });
+                return Ok(new { status = 200 , success = true, datos = data });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { exito = false, error = ex.Message });
+                return StatusCode(500, new { success = false, error = ex.Message });
             }
         }
-
+            
         [HttpGet("rutas")]
         public async Task<IActionResult> Rutas()
         {
@@ -80,14 +80,14 @@ namespace API_TRANSPORTISTE.Controllers
                 if (idEmpresa == -1)
                     return Unauthorized();
 
-                var transportista = await _service.ObtenerRutasPor(idEmpresa);
+                var transportista = await _service.ObtenerRutasPor(0);
 
 
-                return Ok(new { exito = true, datos = transportista });
+                return Ok(new {status = 200,  success = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { exito = false, error = ex.Message });
+                return StatusCode(500, new { success = false, error = ex.Message });
             }
         }
 
@@ -109,11 +109,11 @@ namespace API_TRANSPORTISTE.Controllers
 
                 var transportista = await _service.ObtenerBusesPor(idEmpresa);
 
-                return Ok(new { exito = true, datos = transportista });
+                return Ok(new { status = 200,  success = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { exito = false, error = ex.Message });
+                return StatusCode(500, new { success = false, error = ex.Message });
             }
         }
 
@@ -135,11 +135,11 @@ namespace API_TRANSPORTISTE.Controllers
 
                 var transportista = await _service.ObtenerProgramacionPor(idEmpresa, Fecha, IdOrigen, IdDestino);
 
-                return Ok(new { exito = true, datos = transportista });
+                return Ok(new { success = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { exito = false, error = ex.Message });
+                return StatusCode(500, new { success = false, error = ex.Message });
             }
         }
 
@@ -166,11 +166,11 @@ namespace API_TRANSPORTISTE.Controllers
                     }
                 };//la lista de los tipos de haciendo es parte de la logica de datos, no deberia estar aca. Arregla eso. Hay que mantener el orden de de estructuras.
 
-                return Ok(new { exito = true, datos = listaAsientos });
+                return Ok(new { success = true, datos = listaAsientos });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return BadRequest(new { success = false, error = ex.Message });
             }
         }
 
@@ -182,11 +182,11 @@ namespace API_TRANSPORTISTE.Controllers
                 var transportista = await _service.ObtenerAsientosPor(id);
                 if (transportista == null || transportista.Count == 0)
                     return NotFound(new { mensaje = $"No hay asientos disponibles" });
-                return Ok(new { exito = true, datos = transportista });
+                return Ok(new { success = true, datos = transportista });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return BadRequest(new { success = false, error = ex.Message });
             }
         }
 
@@ -205,13 +205,13 @@ namespace API_TRANSPORTISTE.Controllers
 
 
                 var resultado = await _service.BloquearAsientoPor(IdDetalleProgramacion);
-                if (resultado == null)
-                    return BadRequest(new { mensaje = "No se Obtuvo Token Valido, Este asiento se esta usando por alguien mas" });
-                return Ok(new { exito = true, mensaje = "Token Generado Correctamente", Token = resultado });
+                if (resultado == "" )
+                    return BadRequest(new { success = false,  mensaje = "No se Obtuvo Token Valido, Este asiento se esta usando por alguien mas"  });
+                return Ok(new { success = true, mensaje = "Token Generado Correctamente", Token = resultado });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return BadRequest(new { success = false, error = ex.Message });
             }
         }
 
@@ -235,11 +235,11 @@ namespace API_TRANSPORTISTE.Controllers
 
                 var resultado = await _service.LiberarAsientoPorToken(token);
 
-                return Ok(new { exito = true, mensaje = "Asiento liberado correctamente" });
+                return Ok(new { success = true, mensaje = "Asiento liberado correctamente" });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return BadRequest(new { success = false, error = ex.Message });
 
             }
         }
@@ -292,15 +292,13 @@ namespace API_TRANSPORTISTE.Controllers
 
                 var Crear = await _service.CrearReserva(Venta.TipoDocumento, Venta.NroDocumento, Venta.Pasajero, Venta.FechaNacimiento, Venta.Edad, Venta.Sexo, Venta.Ruc, Venta.RazonSocial, Venta.Direccion, TipoDocumentoVenta, FechaEmision, Venta.IdAgenciaOrigen, Venta.IdAgenciaDestino, "Contado", Venta.MedioDePago, Venta.Tarjeta, FechaVencimiento, 0.00, Venta.Observacion, 0, 2, 0, Venta.IdDetalleProgramacion, Convert.ToString(Venta.Precio), Venta.PrecioLetra, "0.000", Venta.HoraSalida, NuevaDataMenor, 0, Venta.Telefono);
 
-                return Ok(new { exito = true, mensaje = "Reserva creada correctamente", Codigo = Crear });
+                return Ok(new { success = true, mensaje = "Reserva creada correctamente", Codigo = Crear });
 
             }
             catch (Exception ex)
             {
-                return BadRequest(new { exito = false, error = ex.Message });
+                return BadRequest(new { success = false, error = ex.Message });
             }
         }
-
-        
     }
 }

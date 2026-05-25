@@ -54,7 +54,7 @@ namespace CapaServicio.Servicios
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error en servicio al obtener ciudades del transportista: {ex.Message}", ex);
+                throw new Exception($"Error en servicio al obtener ciudades : {ex.Message}", ex);
             }
         }
 
@@ -69,7 +69,7 @@ namespace CapaServicio.Servicios
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error en servicio al obtener rutas del transportista: {ex.Message}", ex);
+                throw new Exception($"Error en servicio al obtener rutas : {ex.Message}", ex);
             }
         }
 

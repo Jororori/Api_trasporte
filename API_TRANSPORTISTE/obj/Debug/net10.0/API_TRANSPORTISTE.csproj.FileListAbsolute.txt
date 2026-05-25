@@ -128,7 +128,6 @@ D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\staticwebassets.build.json
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\staticwebassets.development.json
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\swae.build.ex.cache
-D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRAN.B99E4355.Up2Date
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.dll
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\refint\API_TRANSPORTISTE.dll
@@ -231,3 +230,5 @@ C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\API_TRANSPORTISTE
 C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRAN.B99E4355.Up2Date
 C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.genruntimeconfig.cache
 C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\ref\API_TRANSPORTISTE.dll
+D:\API TRANSPORTE\API_TRANSPORTISTE\bin\Debug\net10.0\dotnet-tools.json
+D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
