@@ -232,3 +232,6 @@ C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\API_TRANSPORTISTE
 C:\Users\josue\Downloads\Api_trasporte-main\Api_trasporte-main\API_TRANSPORTISTE\obj\Debug\net10.0\ref\API_TRANSPORTISTE.dll
 D:\API TRANSPORTE\API_TRANSPORTISTE\bin\Debug\net10.0\dotnet-tools.json
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.RazorAssemblyInfo.cache
+D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Debug\net10.0\API_TRANSPORTISTE.RazorAssemblyInfo.cs
+D:\API TRANSPORTE\API_TRANSPORTISTE\bin\Debug\net10.0\Newtonsoft.Json.dll

@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text.Json;
-
 namespace CapaDatos.Repositorio
 {
     public class TransportistaRepository : ITransportistaRepository
@@ -167,6 +166,9 @@ namespace CapaDatos.Repositorio
                                     Origen = reader[2]?.ToString() ?? "",
                                     Destino = reader[3]?.ToString() ?? "",
                                     Distancia = Convert.ToInt32(reader[4]),
+                                    IdOrigen = Convert.ToInt32(reader[7]),
+                                    IdDestino = Convert.ToInt32(reader[8]),
+
                                 });
                             }
                         }
@@ -275,12 +277,15 @@ namespace CapaDatos.Repositorio
                             while (await reader.ReadAsync())
                             {
                                 var jsonPuntos = reader[14]?.ToString();
-
+                                string HoraLlegadaStr = Convert.ToString(reader[16]);
+                                string HoraSalidaStr = Convert.ToString(reader[5]);
                                 programaciones.Add(new Programaciones
                                 {
                                     IdProgramacion = Convert.ToInt32(reader[0]),
                                     FechaProgramacion = Convert.ToDateTime(reader[4]),
+                                    IdOrigen = Convert.ToInt32(reader[17]),
                                     Origen = reader[1]?.ToString() ?? "",
+                                    IdDestino = Convert.ToInt32(reader[18]),
                                     Destino = reader[2]?.ToString() ?? "",
                                     MarcaBus = reader[11]?.ToString() ?? "",
                                     ModeloBus = reader[10]?.ToString() ?? "",
@@ -290,7 +295,13 @@ namespace CapaDatos.Repositorio
                                     PrecioPiso1 = Convert.ToDecimal(reader[6]),
                                     PrecioPiso2 = Convert.ToDecimal(reader[7]),
                                     Estado = Convert.ToInt32(reader[9]),
-                                    PuntosIntermedios = string.IsNullOrEmpty(jsonPuntos) ? new List<PuntoIntemedio>() : JsonSerializer.Deserialize<List<PuntoIntemedio>>(jsonPuntos)
+                                    FechaLlegada = Convert.ToDateTime(reader[15]),
+                                    HoraSalida = DateTime.Parse(HoraSalidaStr).TimeOfDay,
+                                    HoraLlegada = DateTime.Parse(HoraLlegadaStr).TimeOfDay,
+                                    PuntosIntermedios = string.IsNullOrEmpty(jsonPuntos) ? new List<PuntoIntemedio>() : JsonSerializer.Deserialize<List<PuntoIntemedio>>(jsonPuntos),
+                                    PuntoEmbarque = await ObtenerZonasEmbarquePor(Convert.ToInt32(reader[0])), 
+                                    DireccionOrigen = reader[19]?.ToString() ?? "",
+                                    DireccionDestino = reader[20]?.ToString() ?? "",
                                 });
                             }
                         }
@@ -302,6 +313,100 @@ namespace CapaDatos.Repositorio
                 throw new Exception($"Error al obtener programaciones: {ex.Message}", ex);
             }
             return programaciones;
+        }
+
+        public async Task<List<Programaciones>> ObtenerProgramacionPorRuta(int Id, DateTime Fecha, int IdRuta)
+        {
+            var programaciones = new List<Programaciones>();
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_FiltrarSalidasV3", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@FechaProgramacion", Fecha);
+                        command.Parameters.AddWithValue("@IdEmpresa", Id);
+                        command.Parameters.AddWithValue("@IdRuta", IdRuta);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                var jsonPuntos = reader[14]?.ToString();
+                                string HoraLlegadaStr = Convert.ToString(reader[16]);
+                                string HoraSalidaStr = Convert.ToString(reader[5]);
+                                programaciones.Add(new Programaciones
+                                {
+                                    IdProgramacion = Convert.ToInt32(reader[0]),
+                                    FechaProgramacion = Convert.ToDateTime(reader[4]),
+                                    IdOrigen = Convert.ToInt32(reader[17]),
+                                    Origen = reader[1]?.ToString() ?? "",
+                                    IdDestino = Convert.ToInt32(reader[18]),
+                                    Destino = reader[2]?.ToString() ?? "",
+                                    MarcaBus = reader[11]?.ToString() ?? "",
+                                    ModeloBus = reader[10]?.ToString() ?? "",
+                                    placaBus = reader[3]?.ToString() ?? "",
+                                    IdConductor = Convert.ToInt32(reader[12]),
+                                    Conductor = reader[13]?.ToString() ?? "",
+                                    PrecioPiso1 = Convert.ToDecimal(reader[6]),
+                                    PrecioPiso2 = Convert.ToDecimal(reader[7]),
+                                    Estado = Convert.ToInt32(reader[9]),
+                                    FechaLlegada = Convert.ToDateTime(reader[15]),
+                                    HoraSalida = DateTime.Parse(HoraSalidaStr).TimeOfDay,
+                                    HoraLlegada = DateTime.Parse(HoraLlegadaStr).TimeOfDay,
+                                    PuntosIntermedios = string.IsNullOrEmpty(jsonPuntos) ? new List<PuntoIntemedio>() : JsonSerializer.Deserialize<List<PuntoIntemedio>>(jsonPuntos),
+                                    PuntoEmbarque = await ObtenerZonasEmbarquePor(Convert.ToInt32(reader[0])),
+                                    DireccionOrigen = reader[19]?.ToString() ?? "",
+                                    DireccionDestino = reader[20]?.ToString() ?? "",
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener programaciones: {ex.Message}", ex);
+            }
+            return programaciones;
+        }
+
+        public async Task<List<ZonasEmbarque>> ObtenerZonasEmbarquePor(int idProgramacion)
+        {
+            var zonasEmbarque = new List<ZonasEmbarque>();
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ListarZonasEmbarque", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdProgramacion", idProgramacion);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string HoraSalidaStr = Convert.ToString(reader[2]);
+
+                                zonasEmbarque.Add(new ZonasEmbarque
+                                {
+                                    ID = Convert.ToInt32(reader[0]),
+                                    NombrePuntoIntermedio = reader[1]?.ToString() ?? "",
+                                    HoraSalida = DateTime.Parse(HoraSalidaStr).TimeOfDay,
+                                    Direccion = reader[3]?.ToString() ?? "",
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener zonas de embarque para la programación con id {idProgramacion}: {ex.Message}", ex);
+            }
+            return zonasEmbarque;
         }
 
         public async Task<List<TipoAsiento>> ObtenerTiposAsiento()
@@ -357,18 +462,11 @@ namespace CapaDatos.Repositorio
                             asientos.Add(new DetalleProgramacion
                             {
                                 IdDetalleProgramacion = Convert.ToInt32(reader[5]),
-                                ValorAsiento = reader[0]?.ToString(),
+                                ValorAsiento = reader[0]?.ToString().Trim(),
                                 NumeroFila = Convert.ToInt32(reader[1]),
                                 NumeroColumna = Convert.ToInt32(reader[2]),
                                 NumeroPiso = Convert.ToInt32(reader[3]),
                                 Estado = Convert.ToInt32(reader[4]),
-                                PrecioPiso1 = Convert.ToDecimal(reader[8]),
-                                PrecioPiso2 = Convert.ToDecimal(reader[9]),
-                                PuntosIntermedios = string.IsNullOrEmpty(jsonPuntos) ? new List<PuntoIntemedio>() : JsonSerializer.Deserialize<List<PuntoIntemedio>>(jsonPuntos),
-                                IdOrigen = Convert.ToInt32(reader[11]),
-                                PuntoOrigen = reader[12]?.ToString() ?? "",
-                                IdDestino = Convert.ToInt32(reader[13]),
-                                PuntoDestino = reader[14]?.ToString() ?? ""
                             });
                         }
                     }
@@ -377,7 +475,7 @@ namespace CapaDatos.Repositorio
             return asientos;
         }
 
-        public async Task<string> BloquearAsientoPor(int idDetalleProgramacion)
+        public async Task<string> BloquearAsientoPor(int idDetalleProgramacion, int? Tiempo)
         {
             try
             {
@@ -387,6 +485,7 @@ namespace CapaDatos.Repositorio
                 using SqlCommand command = new SqlCommand("SP_BloquearDetalleSalida", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add("@IdDetalleProgramacion", SqlDbType.Int).Value = idDetalleProgramacion;
+                command.Parameters.Add("@Tiempo", SqlDbType.Int).Value = Tiempo ?? (object)DBNull.Value;
 
                 // ExecuteScalarAsync obtiene el objeto devuelto por el SELECT
                 object result = await command.ExecuteScalarAsync();
@@ -400,6 +499,133 @@ namespace CapaDatos.Repositorio
             }
         }
 
+        public async Task<DateTime> ExtenderReserva(string token, int tiempo)
+        {
+            DateTime FechaExpira = DateTime.MinValue;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ExtenderReserva", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Token", token);
+                        command.Parameters.AddWithValue("@Tiempo", tiempo);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                FechaExpira = reader.GetDateTime(0);
+                            }
+                        }
+                    }
+
+                }
+
+                return FechaExpira;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al extender reserva con token {token}: {ex.Message}", ex);
+            }
+        }
+
+
+        public async Task<DateTime> ExtenderReservaPorId(int IdDetalle, int tiempo)
+        {
+            DateTime FechaExpira = DateTime.MinValue;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ExtenderReservaV2", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalle", IdDetalle);
+                        command.Parameters.AddWithValue("@Tiempo", tiempo);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                FechaExpira = reader.GetDateTime(0);
+                            }
+                        }
+                    }
+
+                }
+
+                return FechaExpira;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al extender reserva con id {IdDetalle}: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<(string, DocumentoElectronicoResponse)> VerEstadoReserva(int IdDetalleProgramacion)
+        {
+            string estado = string.Empty;
+            DocumentoElectronicoResponse DocElectronico = null;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_VerEstadoReserva", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalleProgramacion", IdDetalleProgramacion);
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                estado = reader.GetString(0);
+                                if (estado == "Finalizado")
+                                {
+                                    DocElectronico = new DocumentoElectronicoResponse
+                                    {
+                                        Asiento = reader.GetInt32(1),
+                                        Numero = reader.GetString(2),
+                                        Pdf = ObtenerPdfBytes(reader.GetString(3))
+                                    };
+                                }
+                                else
+                                {
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                return (estado, DocElectronico);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al verificar estado de reserva con IdDetalleProgramacion {IdDetalleProgramacion}: {ex.Message}", ex);
+            }
+        }
+
+        private byte[] ObtenerPdfBytes(string ruta)
+        {
+            try
+            {
+                string rutaPDF = Path.Combine(
+                    @"E:\Site Web\Factura-2.com\site\wwwroot\DocsFilesXML",
+                    ruta + ".pdf"
+                );
+
+                return File.ReadAllBytes(rutaPDF);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al leer PDF: {ex.Message}", ex);
+            }
+        }
         public async Task<bool> LimpiarBloqueoAsientos()
         {
             try
@@ -444,6 +670,28 @@ namespace CapaDatos.Repositorio
             }
         }
 
+        public async Task<bool> LiberarAsientoPorId(int IdDetalle)
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_LiberarDetalleConId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@IdDetalle", SqlDbType.Int).Value = IdDetalle;
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al liberar asiento con id {IdDetalle}: {ex.Message}", ex);
+            }
+        }
+
         public async Task<int> CrearReserva(int TipoDocumento, string NroDocumento, string Pasajero, DateTime? FechaNacimiento, int Edad, string Sexo, string Ruc, string RazonSocial, string Direccion, int TipoDocVenta, DateTime? FechaEmision, int IdAgenciaOrigen, int IdAgenciaDestino, string FormaDePago, string MedioPago, string Tarjeta, DateTime? FechaVencimiento, double Adelanto, string Observaciones, int IdUsuario, int Estado, int IdDocumento, int IdDetalleProgramacion, string precio, string PrecioLetra, string PrecioReprog, string HoraSalida, string Menor, int Embarque, string Telefono)
         {
             int codigo = 0;
@@ -485,7 +733,6 @@ namespace CapaDatos.Repositorio
                         command.Parameters.AddWithValue("@Menor", Menor);
                         command.Parameters.AddWithValue("@Embarque", Embarque);
                         command.Parameters.AddWithValue("@Telefono", Telefono);
-
                         using (var reader = await command.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
@@ -506,6 +753,577 @@ namespace CapaDatos.Repositorio
             }
         }
 
-      
+        public async Task<Login> VerUsuarioPor(int IdEmpresa)
+        {
+            Login login = new Login();
+            try
+            {
+                using (SqlConnection connection = GetConnection("EmpresarialConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerPassPorId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdEmpresa", IdEmpresa);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                login.Ruc = reader["Ruc"]?.ToString() ?? "";
+                                login.Dni = reader["Dni"]?.ToString() ?? "";
+                                login.Pass = reader["Pass"]?.ToString() ?? "";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener usuario para empresa con id {IdEmpresa}: {ex.Message}", ex);
+            }
+            return login;
+        }
+        public async Task<string> ObtenerSeriePor(int TipoDocumento, int IdEmpresa, int IdEstablecimiento)
+        {
+            string serie = string.Empty;
+            try
+            {
+                using (SqlConnection connection = GetConnection("EmpresarialConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerSeriePorTipoDocV2", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@TipoDocumento", TipoDocumento);
+                        command.Parameters.AddWithValue("@IdEmpresa", IdEmpresa);
+                        command.Parameters.AddWithValue("@IdEstablecimiento", IdEstablecimiento);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                serie = reader["Serie"]?.ToString() ?? "";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener serie para tipo de documento {TipoDocumento}, empresa {IdEmpresa} y establecimiento {IdEstablecimiento}: {ex.Message}", ex);
+            }
+            return serie;
+        }
+
+        public async Task<DetalleDocVenta> ObtenerProductoPor(int IdEmpresa)
+        {
+            DetalleDocVenta detalle = new DetalleDocVenta();
+            try
+            {
+                using (SqlConnection connection = GetConnection("FacturacionConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_BuscarProductoPresentBus", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdEmpresa", IdEmpresa);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                detalle.IdProducto = Convert.ToInt32(reader["IdPresentacion"]);
+                                detalle.Codigo = reader["Codigo"]?.ToString() ?? "";
+                                detalle.Descripcion = reader["DescripcionProd"]?.ToString() ?? "";
+                                detalle.Medida = reader["Medida"]?.ToString() ?? "";
+                                detalle.Precio = String.Format("{0:0.00}", Convert.ToDecimal(reader["PrecioVenta"])).Replace(',', '.');
+                                detalle.Descuento = String.Format("{0:0.00}", Convert.ToDecimal(reader["Descuento"])).Replace(',', '.');
+                                detalle.Moneda = reader["Moneda"]?.ToString() ?? "";
+                                detalle.Equivalencia = String.Format("{0:0.00}", Convert.ToDecimal(reader["Equivalencia"])).Replace(',', '.');
+                                detalle.NombreCompleto = (reader["Categoria"]?.ToString() ?? "") + ":" + (reader["Codigo"]?.ToString() ?? "") + "-" + (reader["DescripcionProd"]?.ToString() ?? "") + "-" + (reader["DescripcionMedida"]?.ToString() ?? reader["Medida"]?.ToString() ?? "") + " - " + ((reader["Moneda"]?.ToString() == "PEN") ? "S/" : "$") + " " + string.Format("{0:0.00}", Convert.ToDecimal(reader["PrecioVenta"]));
+                                detalle.TipoProducto = reader["TipoProd"]?.ToString() ?? "";
+                                detalle.Exonerado = Convert.ToInt32(reader["Exonerado"]);
+                                detalle.LogoProd = reader["LogoProd"]?.ToString() ?? "";
+                                detalle.Peso = String.Format("{0:0.00}", Convert.ToDecimal(reader["Peso"])).Replace(',', '.');
+                                detalle.IdMedida = Convert.ToInt32(reader["IdMedida"]);
+                                detalle.NroBolsas = Convert.ToInt32(reader["NroBolsas"]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener producto para empresa con id {IdEmpresa}: {ex.Message}", ex);
+            }
+            return detalle;
+        }
+
+        public async Task<bool> ReprogramarPasajePor(int IdDetalleProgramacion, string Tipo, int IdEmpresa, int IdUsuario)
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ReprogramarPasaje", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalleSalida", IdDetalleProgramacion);
+                        command.Parameters.AddWithValue("@TipoLiberar", Tipo);
+                        command.Parameters.AddWithValue("@IdEmpresa", IdEmpresa);
+                        command.Parameters.AddWithValue("@IdUsuarioLiberar", IdUsuario);
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al reprogramar pasaje con IdDetalleProgramacion {IdDetalleProgramacion}: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<int> ObtenerIdDocVentaPor(int IdDetalleProgramacion)
+        {
+            int IdDocVenta = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerIdDocVentaPorDetalleProgramacion", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalleSalida", IdDetalleProgramacion);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                IdDocVenta = Convert.ToInt32(reader[0]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener IdDocVenta para IdDetalleProgramacion {IdDetalleProgramacion}: {ex.Message}", ex);
+            }
+            return IdDocVenta;
+        }
+
+        public async Task<(int, int)> BuscarDocumentoEnviadoOSE(int IdDocVenta)
+        {
+            int IdUsuario = 0;
+            int EstadoOSE = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("FacturacionConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_BuscarDocumentoEnviadoOSE", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDocumento", IdDocVenta);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                IdUsuario = Convert.ToInt32(reader[7]);
+                                EstadoOSE = Convert.ToInt32(reader[3]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al buscar documento enviado a OSE para IdDocVenta {IdDocVenta}: {ex.Message}", ex);
+            }
+            return (IdUsuario, EstadoOSE);
+        }
+
+        public async Task<bool> AnularDocumento(int IdDocVenta, int IdUsuario)
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("FacturacionConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_AnularDocumento", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDocumento", IdDocVenta);
+                        command.Parameters.AddWithValue("@IdUsuario", IdUsuario);
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al anular documento con IdDocVenta {IdDocVenta}: {ex.Message}", ex);
+
+            }
+        }
+
+        public async Task<bool> LimpiarPor(int IdDetalleProgramacion)
+        {
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_LimpiarDetalleSalida", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalleSalida", IdDetalleProgramacion);
+                        int rowsAffected = await command.ExecuteNonQueryAsync();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al limpiar por IdDetalleProgramacion {IdDetalleProgramacion}: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<DocumentoVenta> ObtenerDatosDocVentaPor(int IdDocVenta)
+        {
+            DocumentoVenta documento = new DocumentoVenta();
+            try
+            {
+                using (SqlConnection connection = GetConnection("FacturacionConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_obtenerDocVentaApi", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDocumentoVenta", IdDocVenta);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                documento.Ruc_emisor = reader[0].ToString();
+                                documento.Dni_usuario = reader[1].ToString();
+                                documento.Pass = reader[2].ToString();
+                                documento.Tipo = reader[3].ToString();
+                                documento.Serie = reader[4].ToString();
+                                documento.Ruc = reader[5].ToString();
+                                documento.Tipo_de_documento = reader[6].ToString();
+                                documento.Razon_social = reader[7].ToString();
+                                documento.Direccion = reader[8].ToString();
+                                documento.Email = reader[9].ToString();
+                                documento.Telefono = reader[10].ToString();
+                                documento.Fecha_de_emision = reader[11].ToString();
+                                documento.Fecha_de_vencimiento = reader[12].ToString();
+                                documento.Moneda = reader[13].ToString();
+                                documento.Total = Convert.ToString(reader[14]);
+                                documento.Observaciones = reader[15].ToString();
+                                documento.Documento_que_se_modifica_tipo = reader[16].ToString();
+                                documento.Documento_que_se_modifica_serie = reader[17].ToString();
+                                documento.Concepto_de_nota__de_credito = reader[18].ToString();
+                                documento.Motivo_de_nota__de_credito = reader[19].ToString();
+                                documento.IncluirIgv = Convert.ToInt32(reader[20]);
+                                documento.Placa = reader[21].ToString();
+                                documento.Bus = Convert.ToInt32(reader[22]);
+                                documento.Documento_que_se_modifica_numero = reader[23].ToString();
+                                documento.Invoice_lines = VerDetalleDocPor(IdDocVenta);
+                                documento.IdEstablecimiento = Convert.ToInt32(reader[24]);
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener datos de DocVenta con IdDocVenta {IdDocVenta}: {ex.Message}", ex);
+            }
+            return documento;
+        }
+
+        private List<Detalle> VerDetalleDocPor(int IdDocVenta)
+        {
+            List<Detalle> detalles = new List<Detalle>();
+            try
+            {
+                using (SqlConnection connection = GetConnection("FacturacionConnection"))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerDetalleDocVenta", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDocVenta", IdDocVenta);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Detalle detalle = new Detalle
+                                {
+                                    Unit_code = reader[0].ToString(),
+                                    Cantidad = reader[1].ToString(),
+                                    Tipo_de_igv = reader[2].ToString(),
+                                    Precio_unitario = reader[3].ToString(),
+                                    Descripcion = reader[4].ToString(),
+                                    IdProducto = Convert.ToInt32(reader[5])
+                                };
+                                detalles.Add(detalle);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener detalles de DocVenta con IdDocVenta {IdDocVenta}: {ex.Message}", ex);
+            }
+            return detalles;
+        }
+
+        public async Task<int> VerIdDetalle(int IdProgramacion, int Asiento)
+        {
+            int IdDetalleProgramacion = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_VerIdDetallePorAsiento", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdProgramacion", IdProgramacion);
+                        command.Parameters.AddWithValue("@Asiento", Asiento);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                IdDetalleProgramacion = Convert.ToInt32(reader[0]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener IdDetalleProgramacion para IdProgramacion {IdProgramacion} y Asiento {Asiento}: {ex.Message}", ex);
+            }
+            return IdDetalleProgramacion;
+        }
+
+        public async Task<int> GuardarDetalles(int IdProgramacion, string Asientos)
+        {
+            int NroBoleto = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_GuardarDetallesWeb", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdProgramacion", Convert.ToString(IdProgramacion));
+                        command.Parameters.AddWithValue("@Asientos", Asientos);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                NroBoleto = Convert.ToInt32(reader[0]);
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al limpiar por IdProgramacion {IdProgramacion} y Asientos {Asientos}: {ex.Message}", ex);
+            }
+            return NroBoleto;
+        }
+
+        public async Task<List<(int, int)>> VerAsientosPorBoleto(int numeroboleto)
+        {
+            List<(int, int)> asientos = new List<(int, int)>();
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_VerAsientosPorBoleto", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@NroBoleto", numeroboleto);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                asientos.Add((Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1])));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener asientos por boleto {numeroboleto}: {ex.Message}", ex);
+            }
+            return asientos;
+        }
+
+        public async Task<int> GuardarDataPosponer(string jsonData, int numeroBoleto)
+        {
+            int Id = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_CrearReservaTicket", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@JsonData", jsonData);
+                        command.Parameters.AddWithValue("@NumeroBoleto", numeroBoleto);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                Id = Convert.ToInt32(reader[0]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al guardar data posponer para boleto {numeroBoleto}: {ex.Message}", ex);
+            }
+            return Id;
+        }
+
+        public async Task<decimal> ObtenerMontoAnteriorPor(int IdDetalleProgramacion)
+        {
+            decimal monto = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerMontoAnteriorPor", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdDetalleProgramacion", IdDetalleProgramacion);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                monto = Convert.ToDecimal(reader[0]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener monto anterior para detalle {IdDetalleProgramacion}: {ex.Message}", ex);
+            }
+            return monto;
+        }
+
+        public async Task<decimal> ObtenerMontosPor(int IdProgramacion, int Asiento, int IdDestino)
+        {
+            decimal monto = 0;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_VerPrecioActual", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdProgramacion", IdProgramacion);
+                        command.Parameters.AddWithValue("@Asiento", Asiento);
+                        command.Parameters.AddWithValue("@IdDestino", IdDestino);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                monto = Convert.ToDecimal(reader[0]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener montos para programación {IdProgramacion}: {ex.Message}", ex);
+            }
+            return monto;
+        }
+
+        public async Task<(int, string)> ObetenerDatosReservaPorId(int IdReserva)
+        {
+            int IdDetalleProgramacion = 0;
+            string Reserva = string.Empty;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerDatosReservaPorId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdReserva", IdReserva);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                IdDetalleProgramacion = Convert.ToInt32(reader[0]);
+                                Reserva = reader[1].ToString() ?? string.Empty;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener datos de reserva por IdReserva {IdReserva}: {ex.Message}", ex);
+            }
+            return (IdDetalleProgramacion, Reserva);
+        }
+
+        public async Task<(string, string)> ObtenerPlacaHora(int IdProgramacion, int PuntoEmbarque)
+        {
+            string placa = string.Empty;
+            string hora = string.Empty;
+            try
+            {
+                using (SqlConnection connection = GetConnection("TransportistaConnection"))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("SP_ObtenerPlacaHora", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@IdProgramacion", IdProgramacion);
+                        command.Parameters.AddWithValue("@IdPuntoEmbarque", PuntoEmbarque);
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            
+
+                            if (await reader.ReadAsync())
+                            {
+                                placa = reader[0].ToString() ?? string.Empty;
+                                hora = reader[1].ToString() ?? string.Empty;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener placa y hora para programación {IdProgramacion}: {ex.Message}", ex);
+            }
+            return (placa, hora);
+        }
     }
 }

@@ -3,12 +3,40 @@
   "WorkspaceRootPath": "D:\\API TRANSPORTE\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9B13B5E2-F425-FBA9-8C49-E0CCD8D9D6B0}|API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj|d:\\api transporte\\api_transportiste\\controllers\\transportistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9B13B5E2-F425-FBA9-8C49-E0CCD8D9D6B0}|API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj|solutionrelative:api_transportiste\\controllers\\transportistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{70CA901F-562B-85DE-CB5B-638070A6560A}|CapaDatos\\CapaDatos.csproj|d:\\api transporte\\capadatos\\repositorio\\transportistarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70CA901F-562B-85DE-CB5B-638070A6560A}|CapaDatos\\CapaDatos.csproj|solutionrelative:capadatos\\repositorio\\transportistarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9B13B5E2-F425-FBA9-8C49-E0CCD8D9D6B0}|API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj|d:\\api transporte\\api_transportiste\\controllers\\transportistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9B13B5E2-F425-FBA9-8C49-E0CCD8D9D6B0}|API_TRANSPORTISTE\\API_TRANSPORTISTE.csproj|solutionrelative:api_transportiste\\controllers\\transportistacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{177B6ADF-AB00-A1C6-9E54-5049E0131815}|CapaServicio\\CapaServicio.csproj|d:\\api transporte\\capaservicio\\servicios\\transportistaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{177B6ADF-AB00-A1C6-9E54-5049E0131815}|CapaServicio\\CapaServicio.csproj|solutionrelative:capaservicio\\servicios\\transportistaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|d:\\api transporte\\capaentidades\\documentoelecreserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|solutionrelative:capaentidades\\documentoelecreserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|d:\\api transporte\\capaentidades\\rutas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|solutionrelative:capaentidades\\rutas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|d:\\api transporte\\capaentidades\\detalleprogramacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|solutionrelative:capaentidades\\detalleprogramacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|d:\\api transporte\\capaentidades\\puntointemedio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|solutionrelative:capaentidades\\puntointemedio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|d:\\api transporte\\capaentidades\\detallereserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|solutionrelative:capaentidades\\detallereserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|d:\\api transporte\\capaentidades\\reprogramacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E428826-A4F8-591B-5447-CACB7FD9CC13}|CapaEntidades\\CapaEntidades.csproj|solutionrelative:capaentidades\\reprogramacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,30 +51,124 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TransportistaRepository.cs",
-              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaDatos\\Repositorio\\TransportistaRepository.cs",
-              "RelativeDocumentMoniker": "CapaDatos\\Repositorio\\TransportistaRepository.cs",
-              "ToolTip": "D:\\API TRANSPORTE\\CapaDatos\\Repositorio\\TransportistaRepository.cs",
-              "RelativeToolTip": "CapaDatos\\Repositorio\\TransportistaRepository.cs",
-              "ViewState": "AgIAAF0BAAAAAAAAAAAnwHMBAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T17:37:07.547Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "TransportistaController.cs",
               "DocumentMoniker": "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\Controllers\\TransportistaController.cs",
               "RelativeDocumentMoniker": "API_TRANSPORTISTE\\Controllers\\TransportistaController.cs",
               "ToolTip": "D:\\API TRANSPORTE\\API_TRANSPORTISTE\\Controllers\\TransportistaController.cs",
               "RelativeToolTip": "API_TRANSPORTISTE\\Controllers\\TransportistaController.cs",
-              "ViewState": "AgIAAK0AAAAAAAAAAAAuwDUAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAE4CAAAAAAAAAAAiwF0CAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T20:38:33.414Z",
+              "WhenOpened": "2026-08-11T15:56:06.9Z",
               "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Rutas.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaEntidades\\Rutas.cs",
+              "RelativeDocumentMoniker": "CapaEntidades\\Rutas.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaEntidades\\Rutas.cs",
+              "RelativeToolTip": "CapaEntidades\\Rutas.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-19T15:21:49.87Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DetalleReserva.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaEntidades\\DetalleReserva.cs",
+              "RelativeDocumentMoniker": "CapaEntidades\\DetalleReserva.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaEntidades\\DetalleReserva.cs",
+              "RelativeToolTip": "CapaEntidades\\DetalleReserva.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAQwCoAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-14T15:36:14.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TransportistaRepository.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaDatos\\Repositorio\\TransportistaRepository.cs",
+              "RelativeDocumentMoniker": "CapaDatos\\Repositorio\\TransportistaRepository.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaDatos\\Repositorio\\TransportistaRepository.cs",
+              "RelativeToolTip": "CapaDatos\\Repositorio\\TransportistaRepository.cs",
+              "ViewState": "AgIAAKcEAAAAAAAAAAD4v7QEAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T22:52:49.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DocumentoElecReserva.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaEntidades\\DocumentoElecReserva.cs",
+              "RelativeDocumentMoniker": "CapaEntidades\\DocumentoElecReserva.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaEntidades\\DocumentoElecReserva.cs",
+              "RelativeToolTip": "CapaEntidades\\DocumentoElecReserva.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T21:52:17.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransportistaService.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaServicio\\Servicios\\TransportistaService.cs",
+              "RelativeDocumentMoniker": "CapaServicio\\Servicios\\TransportistaService.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaServicio\\Servicios\\TransportistaService.cs",
+              "RelativeToolTip": "CapaServicio\\Servicios\\TransportistaService.cs",
+              "ViewState": "AgIAAMABAAAAAAAAAAD4v9MBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-13T17:30:46.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PuntoIntemedio.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaEntidades\\PuntoIntemedio.cs",
+              "RelativeDocumentMoniker": "CapaEntidades\\PuntoIntemedio.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaEntidades\\PuntoIntemedio.cs",
+              "RelativeToolTip": "CapaEntidades\\PuntoIntemedio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-19T16:09:10.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DetalleProgramacion.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaEntidades\\DetalleProgramacion.cs",
+              "RelativeDocumentMoniker": "CapaEntidades\\DetalleProgramacion.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaEntidades\\DetalleProgramacion.cs",
+              "RelativeToolTip": "CapaEntidades\\DetalleProgramacion.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAqwAgAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-19T16:16:08.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Reprogramacion.cs",
+              "DocumentMoniker": "D:\\API TRANSPORTE\\CapaEntidades\\Reprogramacion.cs",
+              "RelativeDocumentMoniker": "CapaEntidades\\Reprogramacion.cs",
+              "ToolTip": "D:\\API TRANSPORTE\\CapaEntidades\\Reprogramacion.cs",
+              "RelativeToolTip": "CapaEntidades\\Reprogramacion.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBAAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-12T00:30:45.266Z"
             }
           ]
         }

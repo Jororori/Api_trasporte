@@ -130,13 +130,13 @@ namespace CapaServicio.Servicios
             }
         }
 
-        public async Task<string> BloquearAsientoPor(int idDetalleProgramacion)
+        public async Task<string> BloquearAsientoPor(int idDetalleProgramacion, int? Tiempo)
         {
             try
             {
                 if (idDetalleProgramacion <= 0)
                     throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
-                string resultado = await _repository.BloquearAsientoPor(idDetalleProgramacion);
+                string resultado = await _repository.BloquearAsientoPor(idDetalleProgramacion, Tiempo);
                 return resultado;
             }
             catch (Exception ex)
@@ -146,6 +146,31 @@ namespace CapaServicio.Servicios
 
         }
 
+        public async Task<DateTime> ExtenderReserva(string token, int tiempo)
+        {
+            try
+            {
+                var resultado = await _repository.ExtenderReserva(token, tiempo);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al extender reserva: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<DateTime> ExtenderReservaPorId(int IdDetalle, int tiempo)
+        {
+            try
+            {
+                var resultado = await _repository.ExtenderReservaPorId(IdDetalle, tiempo);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al extender reserva: {ex.Message}", ex);
+            }
+        }
         public async Task<bool> LimpiarBloqueoAsientos()
         {
             try
@@ -173,6 +198,21 @@ namespace CapaServicio.Servicios
                 throw new Exception($"Error en servicio al liberar asiento por token: {ex.Message}", ex);
             }
         }
+
+        public async Task<bool> LiberarAsientoPorId(int IdDetalle)
+        {
+            try
+            {
+                if (IdDetalle < 0)
+                    throw new ArgumentException("El id del detalle no puede estar vacío");
+                var resultado = await _repository.LiberarAsientoPorId(IdDetalle);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al liberar asiento por id: {ex.Message}", ex);
+            }
+        }
         public async Task<int> CrearReserva(int TipoDocumento, string NroDocumento, string Pasajero, DateTime? FechaNacimiento, int Edad, string Sexo, string Ruc, string RazonSocial, string Direccion, int TipoDocVenta, DateTime? FechaEmision, int IdAgenciaOrigen, int IdAgenciaDestino, string FormaDePago, string MedioPago, string Tarjeta, DateTime? FechaVencimiento, double Adelanto, string Observaciones, int IdUsuario, int Estado, int IdDocumento, int IdDetalleProgramacion, string precio, string PrecioLetra, string PrecioReprog, string HoraSalida, string Menor, int Embarque, string Telefono)
         {
             try
@@ -191,6 +231,306 @@ namespace CapaServicio.Servicios
                 throw new Exception($"Error en servicio al crear reserva: {ex.Message}", ex);
             }
         }
-      
+
+        public async Task<Login> VerUsuarioPor(int IdEmpresa)
+        {
+            try
+            {
+                if (IdEmpresa <= 0)
+                    throw new ArgumentException("El id de empresa debe ser mayor a 0");
+                var usuario = await _repository.VerUsuarioPor(IdEmpresa);
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al verificar usuario: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<string> ObtenerSeriePor(int TipoDocumento, int IdEmpresa, int IdEstablecimiento)
+        {
+            try
+            {
+                if (IdEmpresa <= 0)
+                    throw new ArgumentException("El id de empresa debe ser mayor a 0");
+                string serie = await _repository.ObtenerSeriePor(TipoDocumento, IdEmpresa, IdEstablecimiento);
+                return serie;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al Obtener serie: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<DetalleDocVenta> ObtenerProductoPor(int IdEmpresa)
+        {
+            try
+            {
+                if (IdEmpresa <= 0)
+                    throw new ArgumentException("El id de empresa debe ser mayor a 0");
+                var producto = await _repository.ObtenerProductoPor(IdEmpresa);
+                return producto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al Obtener producto: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<bool> ReprogramarPasajePor(int IdDetalleProgramacion, string Tipo, int IdEmpresa, int IdUsuario)
+        {
+            try
+            {
+                if (IdDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                if (string.IsNullOrWhiteSpace(Tipo))
+                    throw new ArgumentException("El tipo no puede estar vacío");
+                if (IdEmpresa <= 0)
+                    throw new ArgumentException("El id de empresa debe ser mayor a 0");
+
+                var resultado = await _repository.ReprogramarPasajePor(IdDetalleProgramacion, Tipo, IdEmpresa, IdUsuario);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al reprogramar pasaje: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<(string, DocumentoElectronicoResponse)> VerEstadoReserva(int IdDetalleProgramacion)
+        {
+            try
+            {
+                if (IdDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                var estado = await _repository.VerEstadoReserva(IdDetalleProgramacion);
+                return estado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al verificar estado de reserva: {ex.Message}", ex);
+            }
+        }
+        public async Task<int> ObtenerIdDocVentaPor(int IdDetalleProgramacion)
+        {
+            try
+            {
+                if (IdDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                var idDocVenta = await _repository.ObtenerIdDocVentaPor(IdDetalleProgramacion);
+                return idDocVenta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener id de documento de venta: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<(int, int)> BuscarDocumentoEnviadoOSE(int IdDocVenta)
+        {
+            try
+            {
+                if (IdDocVenta <= 0)
+                    throw new ArgumentException("El id del documento de venta debe ser mayor a 0");
+                var resultado = await _repository.BuscarDocumentoEnviadoOSE(IdDocVenta);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al buscar documento enviado a OSE: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<bool> AnularDocumento(int IdDocVenta, int IdUsuario)
+        {
+            try
+            {
+                if (IdDocVenta <= 0)
+                    throw new ArgumentException("El id del documento de venta debe ser mayor a 0");
+                var resultado = await _repository.AnularDocumento(IdDocVenta, IdUsuario);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al anular documento de venta: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<bool> LimpiarPor(int IdDetalleProgramacion)
+        {
+            try
+            {
+                if (IdDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                var resultado = await _repository.LimpiarPor(IdDetalleProgramacion);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al limpiar reserva: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<DocumentoVenta> ObtenerDatosDocVentaPor(int IdDocVenta)
+        {
+            try
+            {
+                if (IdDocVenta <= 0)
+                    throw new ArgumentException("El id del documento de venta debe ser mayor a 0");
+                var resultado = await _repository.ObtenerDatosDocVentaPor(IdDocVenta);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener datos de documento de venta: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<int> VerIdDetalle(int IdProgramacion, int Asiento)
+        {
+            try
+            {
+                if (IdProgramacion <= 0)
+                    throw new ArgumentException("El id de programación debe ser mayor a 0");
+                if (Asiento <= 0)
+                    throw new ArgumentException("El número de asiento debe ser mayor a 0");
+                var resultado = await _repository.VerIdDetalle(IdProgramacion, Asiento);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener id de detalle: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<int> GuardarDetalles(int IdProgramacion, string Asientos)
+        {
+            try
+            {
+                if (IdProgramacion <= 0)
+                    throw new ArgumentException("El id de programación debe ser mayor a 0");
+                if (string.IsNullOrWhiteSpace(Asientos))
+                    throw new ArgumentException("La lista de asientos no puede estar vacía");
+                var resultado = await _repository.GuardarDetalles(IdProgramacion, Asientos);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al guardar detalles: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<List<(int, int)>> VerAsientosPorBoleto(int numeroboleto)
+        {
+            try
+            {
+                if (numeroboleto <= 0)
+                    throw new ArgumentException("El número de boleto debe ser mayor a 0");
+                var resultado = await _repository.VerAsientosPorBoleto(numeroboleto);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener asientos por boleto: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<int> GuardarDataPosponer(string jsonData, int numeroBoleto)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(jsonData))
+                    throw new ArgumentException("El jsonData no puede estar vacío");
+                if (numeroBoleto <= 0)
+                    throw new ArgumentException("El número de boleto debe ser mayor a 0");
+                var resultado = await _repository.GuardarDataPosponer(jsonData, numeroBoleto);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al guardar data posponer: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<decimal> ObtenerMontoAnteriorPor(int IdDetalleProgramacion)
+        {
+            try
+            {
+                if (IdDetalleProgramacion <= 0)
+                    throw new ArgumentException("El id del detalle de programación debe ser mayor a 0");
+                var resultado = await _repository.ObtenerMontoAnteriorPor(IdDetalleProgramacion);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener monto anterior: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<decimal> ObtenerMontosPor(int IdProgramacion, int Asiento, int IdDestino)
+        {
+            try
+            {
+                if (IdProgramacion <= 0)
+                    throw new ArgumentException("El id de programación debe ser mayor a 0");
+                if (Asiento <= 0)
+                    throw new ArgumentException("El número de asiento debe ser mayor a 0");
+                if (IdDestino <= 0)
+                    throw new ArgumentException("El id del destino debe ser mayor a 0");
+                var resultado = await _repository.ObtenerMontosPor(IdProgramacion, Asiento, IdDestino);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener montos: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<(int, string)> ObetenerDatosReservaPorId(int IdReserva)
+        {
+            try
+            {
+                if (IdReserva <= 0)
+                    throw new ArgumentException("El id de reserva debe ser mayor a 0");
+                var resultado = await _repository.ObetenerDatosReservaPorId(IdReserva);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener datos de reserva por id: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<(string, string)> ObtenerPlacaHora(int IdProgramacion, int PuntoEmbarque)
+        {
+            try
+            {
+                if (IdProgramacion <= 0)
+                    throw new ArgumentException("El id de programación debe ser mayor a 0");
+                if (PuntoEmbarque <= 0)
+                    throw new ArgumentException("El id del punto de embarque debe ser mayor a 0");
+                var resultado = await _repository.ObtenerPlacaHora(IdProgramacion, PuntoEmbarque);
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener placa y hora: {ex.Message}", ex);
+            }
+        }
+
+        public async Task<List<Programaciones>> ObtenerProgramacionPorRuta(int Id, DateTime Fecha, int IdRuta)
+        {
+            try
+            {
+                if (IdRuta <= 0)
+                    throw new ArgumentException("El id de ruta debe ser mayor a 0");
+                var programaciones = await _repository.ObtenerProgramacionPorRuta(Id, Fecha, IdRuta);
+                return programaciones;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en servicio al obtener programaciones por ruta: {ex.Message}", ex);
+            }
+        }
     }
 }

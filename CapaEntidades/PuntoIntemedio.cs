@@ -10,5 +10,6 @@ namespace CapaEntidades
         public string Name { get; set; }
         public decimal P1er { get; set; }
         public decimal P2do { get; set; }
+        public string Direccion { get; set; }
     }
 }

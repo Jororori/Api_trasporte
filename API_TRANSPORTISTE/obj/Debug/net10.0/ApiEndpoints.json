@@ -33,6 +33,43 @@
   },
   {
     "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "BloquearAsientosPorId",
+    "RelativePath": "v1/auth/Transportista/Asientos/BloqueoAsientoV2",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdDetalleProgramacion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tiempo",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "LiberarAsientoPorId",
+    "RelativePath": "v1/auth/Transportista/Asientos/Liberar/{IdDetalle}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdDetalle",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
     "Method": "Buses",
     "RelativePath": "v1/auth/Transportista/buses",
     "HttpMethod": "GET",
@@ -95,6 +132,27 @@
   },
   {
     "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "Programaciones",
+    "RelativePath": "v1/auth/Transportista/programacionesV2",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Fecha",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdRuta",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
     "Method": "CrearReserva",
     "RelativePath": "v1/auth/Transportista/Reservas",
     "HttpMethod": "POST",
@@ -104,6 +162,128 @@
       {
         "Name": "Venta",
         "Type": "CapaEntidades.DetalleReserva",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "AnularReserva",
+    "RelativePath": "v1/auth/Transportista/Reservas/Anular",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "numeroBoleto",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "VerEstadoReserva",
+    "RelativePath": "v1/auth/Transportista/Reservas/Estado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdDetalleProgramacion",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "ExtenderReserva",
+    "RelativePath": "v1/auth/Transportista/Reservas/Extender",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tiempo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "ExtenderReservaPorId",
+    "RelativePath": "v1/auth/Transportista/Reservas/ExtenderV2",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdDetalle",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Tiempo",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "PosponerReserva",
+    "RelativePath": "v1/auth/Transportista/Reservas/Posponer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "CapaEntidades.PosponerTicket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "ReprogramarReserva",
+    "RelativePath": "v1/auth/Transportista/Reservas/ReprogramarTicket",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdReserva",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_TRANSPORTISTE.Controllers.TransportistaController",
+    "Method": "CrearReservaMasiva",
+    "RelativePath": "v1/auth/Transportista/ReservasLista",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boleto",
+        "Type": "CapaEntidades.Boleto",
         "IsRequired": true
       }
     ],

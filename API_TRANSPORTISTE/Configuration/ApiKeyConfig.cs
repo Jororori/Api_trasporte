@@ -17,10 +17,14 @@ namespace API_TRANSPORTISTE.Configuration
             { "bearer_reset_soft_secreto_abc123def456", 1 },
 
             // Token para empresa 2
-            { "UygJULtqrzputY5yyODpSVGrKluO0wb7BpqoFsLeYbPy54", 129 },
+            { "8fAqwpFt6h9JTlDERFWDiegamES7cSpbxVRvBvfLiqP5M7sM0IzJyFjv6Q2jEkmD", 129 }, //EMP DE TRANSP EXPRESO LOS HUSARES SRLTDA
 
             // Token para empresa 3
-            { "UygJULtqrzputY5yyODpSVGrKluO0wb7BpqoFsLeYbPyZYmG2SXDSBOGkGmSGCm2", 3 },
+            { "dj30dgkUwuX9Pyimh2q23LSFP9amiOQiTzad90zpOfes4hwf5dfWtFtUteSJc24c", 1441}, // EMPRESA DE TRANSPORTES TURISMO LOS HUSARES S.A.C.
+
+
+            { "Ga0ARAz3tSo5S8EvjFD2fk6yMDkUobyUJQ1rjLkxUJVKipI5G2k7wYHO457tKUpH", 2505}, // EMPRESA DE TRANSPORTES TURISMO LOS HUSARES S.A.C.
+
         };
 
         /// <summary>

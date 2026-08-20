@@ -9,6 +9,7 @@ D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\API_TRANSPORT
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\API_TRANSPORTISTE.pdb
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\Microsoft.AspNetCore.OpenApi.dll
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\Microsoft.OpenApi.dll
+D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\System.Data.SqlClient.dll
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\runtimes\win-arm64\native\sni.dll
 D:\API TRANSPORTE\API_TRANSPORTISTE\obj\Release\net10.0\PubTmp\Out\runtimes\win-x64\native\sni.dll

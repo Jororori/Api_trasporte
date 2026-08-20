@@ -95,6 +95,40 @@
         }
       }
     },
+    "/v1/auth/Transportista/programacionesV2": {
+      "get": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "Fecha",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "IdRuta",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/auth/Transportista/TipoAsiento": {
       "get": {
         "tags": [
@@ -160,6 +194,141 @@
         }
       }
     },
+    "/v1/auth/Transportista/Asientos/BloqueoAsientoV2": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "IdDetalleProgramacion",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Tiempo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Reservas/Extender": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Tiempo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Reservas/ExtenderV2": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "IdDetalle",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Tiempo",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Reservas/Estado": {
+      "get": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "IdDetalleProgramacion",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/v1/auth/Transportista/Asientos/Bloquear/{token}": {
       "delete": {
         "tags": [
@@ -172,6 +341,33 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Asientos/Liberar/{IdDetalle}": {
+      "delete": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "IdDetalle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
             }
           }
         ],
@@ -202,6 +398,117 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/DetalleReserva"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Reservas/Anular": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "numeroBoleto",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Reservas/Posponer": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosponerTicket"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosponerTicket"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosponerTicket"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/Reservas/ReprogramarTicket": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "parameters": [
+          {
+            "name": "IdReserva",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/auth/Transportista/ReservasLista": {
+      "post": {
+        "tags": [
+          "Transportista"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Boleto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Boleto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Boleto"
               }
             }
           },
@@ -256,10 +563,37 @@
   },
   "components": {
     "schemas": {
+      "Boleto": {
+        "type": "object",
+        "properties": {
+          "idProgramacion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "venta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleReserva"
+            }
+          }
+        }
+      },
       "DetalleReserva": {
         "type": "object",
         "properties": {
           "idDetalleProgramacion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "asiento": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
               "integer",
@@ -340,6 +674,14 @@
             ],
             "format": "int32"
           },
+          "puntoEmbarque": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
           "idAgenciaDestino": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
@@ -391,6 +733,169 @@
               "null",
               "string"
             ]
+          },
+          "incluidoIGV": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "placaBus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Pasajeros": {
+        "type": "object",
+        "properties": {
+          "asiento": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "pasajero": {
+            "type": "string"
+          },
+          "tipoDocumento": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "nroDocumento": {
+            "type": "string"
+          },
+          "fechaNacimiento": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "sexo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "serieBoleto": {
+            "type": "string"
+          },
+          "ruc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "razonSocial": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "direccion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "montoAnteriorP": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "idDetalleProgAnterior": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "idDocVenta": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "PosponerTicket": {
+        "type": "object",
+        "properties": {
+          "numeroBoleto": {
+            "type": "string"
+          },
+          "idProgramacion": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "telefono": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "medioDePago": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tarjeta": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "pasajeros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pasajeros"
+            }
+          },
+          "puntoEmbarque": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "idDestino": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "idOrigen": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           }
         }
       },

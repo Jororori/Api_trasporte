@@ -4,9 +4,15 @@ using System.Text;
 
 namespace CapaEntidades
 {
+    public class Boleto { 
+        public int IdProgramacion { get; set; }
+        public List<DetalleReserva> venta { get; set; }
+    }
+
     public class DetalleReserva
     {
         public int IdDetalleProgramacion { get; set; }
+        public int Asiento { get; set; }
         public int TipoDocumento { get; set; }
 
         public string? NroDocumento { get; set; }
@@ -23,6 +29,8 @@ namespace CapaEntidades
         public string? Sexo { get; set; }
 
         public int IdAgenciaOrigen { get; set; }
+        public int PuntoEmbarque { get; set; }
+
         public int IdAgenciaDestino { get; set; }
 
         public string? MedioDePago { get; set; }
@@ -33,5 +41,8 @@ namespace CapaEntidades
         public string? Menor { get; set; }
         public decimal Precio { get; set; }
         public string? PrecioLetra { get; set; }
+        public int IncluidoIGV { get; set; }
+        public string? PlacaBus { get; set; }
+
     }
 }
